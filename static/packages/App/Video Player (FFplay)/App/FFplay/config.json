@@ -1,6 +1,6 @@
 {
-"label":"Video Player",
+"label":"Trình phát Video",
 "icon":"../../Icons/Default/app/ffplay.png",
 "launch":"launch.sh",
-"description":"FFplay"
+"description":"FFplay - Phần mềm chạy video"
 }
