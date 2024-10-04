@@ -1,6 +1,6 @@
 {
-    "label": "Guest Mode [OFF]",
+    "label": "Chế độ khách [TẮT]",
     "icon": "../../Icons/Default/app/guest_off.png",
     "launch": "launch.sh",
-    "description": "Activate the guest profile"
+    "description": "Kích hoạt hồ sơ khách"
 }

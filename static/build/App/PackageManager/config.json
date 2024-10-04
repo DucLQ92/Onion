@@ -1,6 +1,6 @@
 {
-"label":"Package Manager",
+"label":"Trình quản lý gói",
 "icon":"../../Icons/Default/app/pacman.png",
 "launch":"launch.sh",
-"description":"Add or remove systems and apps"
+"description":"Thêm hoặc xóa hệ thống và ứng dụng"
 }

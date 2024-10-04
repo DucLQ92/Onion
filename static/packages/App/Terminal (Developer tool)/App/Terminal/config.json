@@ -2,5 +2,5 @@
 "label":"Terminal",
 "icon":"../../Icons/Default/app/terminal.png",
 "launch":"launch.sh",
-"description":"st - Simple Terminal"
+"description":"st - Terminal đơn giản"
 }

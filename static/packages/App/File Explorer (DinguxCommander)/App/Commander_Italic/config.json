@@ -1,6 +1,6 @@
 {
-"label":"File Explorer",
+"label":"Quản lý tập tin",
 "icon":"../../Icons/Default/app/commander.png",
 "launch":"launch.sh",
-"description":"DinguxCommander"
+"description":"DinguxCommander - Quản lý tập tin"
 }

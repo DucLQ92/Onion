@@ -1,7 +1,7 @@
 {
-  "label": "Clock",
+  "label": "Đồng hồ",
   "icon": "../../Icons/Default/app/clock.png",
   "iconsel": "",
   "launch": "launch.sh",
-  "description": "Set the current time"
+  "description": "Đặt thời gian hiện tại"
 }

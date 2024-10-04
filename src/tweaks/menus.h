@@ -931,7 +931,7 @@ void *_get_menu_icon(const char *name)
 void menu_main(void)
 {
     if (!_menu_main._created) {
-        _menu_main = list_createWithTitle(6, LIST_LARGE, "Điều chỉnh");
+        _menu_main = list_createWithTitle(6, LIST_LARGE, "Tweaks");
         list_addItem(&_menu_main,
                      (ListItem){
                          .label = "Hệ thống",

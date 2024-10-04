@@ -192,7 +192,7 @@ int main(int argc, char *argv[])
 
     int levelPage = 0;
 
-    showCenteredMessage(video, screen, "Loading previews...", font30,
+    showCenteredMessage(video, screen, "Đang tải bản xem trước...", font30,
                         color_white);
 
     char themes[NUMBER_OF_THEMES][STR_MAX];
@@ -264,7 +264,7 @@ int main(int argc, char *argv[])
 
         if (keystate[SW_BTN_A]) {
             if (levelPage == 1) {
-                showCenteredMessage(video, screen, "Installing...", font30,
+                showCenteredMessage(video, screen, "Đang cài đặt...", font30,
                                     color_white);
 
                 // Install theme
@@ -346,7 +346,7 @@ int main(int argc, char *argv[])
 
             char title[STR_MAX + 13];
             if (current_page == installed_page && !is_preview)
-                snprintf(title, STR_MAX + 12, "%s - Installed", theme.name);
+                snprintf(title, STR_MAX + 12, "%s - Đã cài đặt", theme.name);
             else
                 strcpy(title, theme.name);
 

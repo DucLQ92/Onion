@@ -1,6 +1,6 @@
 {
-	"label":	"Battery Monitor",
+	"label":	"Theo dõi pin",
 	"icon":	"/mnt/SDCARD/Icons/Default/app/battery_monitor.png",
 	"launch":	"launch.sh",
-	"description":	"Monitor your battery usage"
+	"description":	"Theo dõi mức sử dụng pin của bạn"
 }

@@ -1,6 +1,6 @@
 {
-"label":"Themes",
+"label":"Chủ đề",
 "icon":"../../Icons/Default/app/themes.png",
 "launch":"launch.sh",
-"description":"Change system theme"
+"description":"Thay đổi chủ đề hệ thống"
 }

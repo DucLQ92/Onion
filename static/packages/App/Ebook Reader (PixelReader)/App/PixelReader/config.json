@@ -1,6 +1,6 @@
 {
-"label":"Ebook Reader",
+"label":"Đọc sách điện tử",
 "icon":"../../Icons/Default/app/ereader.png",
 "launch":"launch.sh",
-"description":"PixelReader v0.6"
+"description":"PixelReader v0.6 - Đọc sách"
 }

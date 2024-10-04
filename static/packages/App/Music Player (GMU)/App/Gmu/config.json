@@ -1,6 +1,6 @@
 {
-"label":"Music Player",
+"label":"Máy chơi nhạc",
 "icon":"../../Icons/Default/app/music.png",
 "launch":"launch.sh",
-"description":"GMU (Menu+Select to exit)"
+"description":"GMU - Chơi nhạc (Menu+Select để thoát)"
 }
