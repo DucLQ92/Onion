@@ -47,7 +47,7 @@ SDL_Surface *createBottomBar(TTF_Font *font)
     pos.x += surfaceButtonA->w + 10;
 
     SDL_Surface *text =
-        TTF_RenderUTF8_Blended(font, "INSTALL", (SDL_Color){255, 255, 255});
+        TTF_RenderUTF8_Blended(font, "CÀI", (SDL_Color){255, 255, 255});
     pos.y = 35 - text->h / 2 - 3;
     SDL_BlitSurface(text, NULL, surface, &pos);
     pos.x += text->w + 20;
@@ -57,7 +57,7 @@ SDL_Surface *createBottomBar(TTF_Font *font)
     SDL_BlitSurface(surfaceButtonB, NULL, surface, &pos);
     pos.x += surfaceButtonB->w + 10;
 
-    text = TTF_RenderUTF8_Blended(font, "CANCEL", (SDL_Color){255, 255, 255});
+    text = TTF_RenderUTF8_Blended(font, "HUỶ", (SDL_Color){255, 255, 255});
     pos.y = 35 - text->h / 2 - 3;
     SDL_BlitSurface(text, NULL, surface, &pos);
     pos.x += text->w + 20;
@@ -67,7 +67,7 @@ SDL_Surface *createBottomBar(TTF_Font *font)
     SDL_BlitSurface(surfaceButtonX, NULL, surface, &pos);
     pos.x += surfaceButtonX->w + 10;
 
-    text = TTF_RenderUTF8_Blended(font, "TOGGLE ICONS",
+    text = TTF_RenderUTF8_Blended(font, "BÂT/TẮT BIỂU TƯỢNG",
                                   (SDL_Color){255, 255, 255});
     pos.y = 35 - text->h / 2 - 3;
     SDL_BlitSurface(text, NULL, surface, &pos);
@@ -192,7 +192,7 @@ int main(int argc, char *argv[])
 
     int levelPage = 0;
 
-    showCenteredMessage(video, screen, "Đang tải bản xem trước...", font30,
+    showCenteredMessage(video, screen, "Đang tai ban xem truoc...", font30,
                         color_white);
 
     char themes[NUMBER_OF_THEMES][STR_MAX];
@@ -264,7 +264,7 @@ int main(int argc, char *argv[])
 
         if (keystate[SW_BTN_A]) {
             if (levelPage == 1) {
-                showCenteredMessage(video, screen, "Đang cài đặt...", font30,
+                showCenteredMessage(video, screen, "Đang cài...", font30,
                                     color_white);
 
                 // Install theme
@@ -346,7 +346,7 @@ int main(int argc, char *argv[])
 
             char title[STR_MAX + 13];
             if (current_page == installed_page && !is_preview)
-                snprintf(title, STR_MAX + 12, "%s - Đã cài đặt", theme.name);
+                snprintf(title, STR_MAX + 12, "%s - Đã cài", theme.name);
             else
                 strcpy(title, theme.name);
 
@@ -393,8 +393,8 @@ int main(int argc, char *argv[])
 
             rectThemeName.x = 60;
             char msg[STR_MAX];
-            sprintf(msg, "%s [%s]", has_icons ? "Apply icons" : "Reset icons",
-                    apply_icons ? "ON" : "OFF");
+            sprintf(msg, "%s [%s]", has_icons ? "Áp dụng biểu tượng" : "Đặt lại biểu tượng",
+                    apply_icons ? "BẬT" : "TẮT");
             imagePages = TTF_RenderUTF8_Blended(font21, msg, color_white);
             SDL_BlitSurface(imagePages, NULL, screen, &rectThemeName);
             SDL_FreeSurface(imagePages);

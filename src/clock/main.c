@@ -305,7 +305,7 @@ int main(int argc, char *argv[])
 
         GFX_FillRect(sdl_screen, NULL, 0);
 
-        PrintWhiteString("Vui lòng đặt Đồng hồ", sdl_screen, 10, 5);
+        PrintWhiteString("Vui long dat Dong ho", sdl_screen, 10, 5);
 
         PrintString("dd/mm/yyyy hh:mm:ss", sdl_screen, DARK_GRAY_COLOR, 26, 20);
         snprintf(tmp_str, sizeof(tmp_str), "%02d/%02d/%04d %02d:%02d:%02d",
@@ -322,8 +322,8 @@ int main(int argc, char *argv[])
                 26 + (select_cursor * 24) + (select_cursor > 2 ? 16 : 0), 50);
         }
 
-        PrintWhiteString("Start: Cập nhật thời gian/Thoát", sdl_screen, 10, 70);
-        PrintWhiteString("B: Thoát", sdl_screen, 10, 90);
+        PrintWhiteString("Start: Cap nhat thoi gian/Thoat", sdl_screen, 10, 70);
+        PrintWhiteString("B: Thoat", sdl_screen, 10, 90);
 
         /* Print back buffer to the final screen */
         SDL_SoftStretch(sdl_screen, &rectS, screen, &rectD);
