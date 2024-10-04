@@ -1,4 +1,5 @@
 #!/bin/sh
+scriptlabel="Đặt giờ"
 sysdir=/mnt/SDCARD/.tmp_update
 savedir=/mnt/SDCARD/Saves/CurrentProfile/saves
 

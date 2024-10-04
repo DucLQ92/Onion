@@ -18,14 +18,14 @@ if [ "$3" = "DynamicLabel" ]; then
 		if [ -n "$netplaycore_info" ]; then
 			netplaycore=$(echo "$netplaycore_info" | cut -d ';' -f 2)
 			if [ "$netplaycore" = "none" ]; then
-				DynamicLabel="No Netplay for $emulabel"
+				DynamicLabel="Không có Netplay cho $emulabel"
 			else
 				netplaycore_without_suffix=$(echo "$netplaycore" | awk -F "_libretro.so" '{print $1}')
-				DynamicLabel="Netplay (core supported: ${netplaycore_without_suffix})"
+				DynamicLabel="Netplay (Giả lập được hỗ trợ: ${netplaycore_without_suffix})"
 			fi
 
 		else
-			DynamicLabel="Netplay (core not verified: ${retroarch_core%_libretro})"
+			DynamicLabel="Netplay (Giả lập chưa xác minh: ${retroarch_core%_libretro})"
 		fi
 	fi
 
@@ -65,16 +65,16 @@ echo "##########################################################################
 echo "#################################### Netplay.sh script start.######################################################"
 echo "###################################################################################################################"
 LD_PRELOAD=/mnt/SDCARD/miyoo/lib/libpadsp.so prompt -t "Netplay" \
-	"Host a session..." \
-	"Join a session..."
+	"Tạo máy chủ..." \
+	"Tham gia..."
 
 retcode=$?
 if [ $retcode -eq 0 ]; then
 
 	PlayerNum=1
-	LD_PRELOAD=/mnt/SDCARD/miyoo/lib/libpadsp.so prompt -t "HOST - Netplay type" \
-		"Standard Netplay (Use current Wifi)" \
-		"Easy Netplay (play anywhere, local only)" \
+	LD_PRELOAD=/mnt/SDCARD/miyoo/lib/libpadsp.so prompt -t "MÁY CHỦ - Kiểu Netplay" \
+		"Netplay chuẩn (Sử dụng Wifi hiện tại)" \
+		"Easy Netplay (chơi ở bất cứ đâu, cục bộ)" \
 		"$EasyNetplayPokemon"
 
 	retcode=$?
@@ -92,9 +92,9 @@ if [ $retcode -eq 0 ]; then
 	fi
 elif [ $retcode -eq 1 ]; then
 	PlayerNum=2
-	LD_PRELOAD=/mnt/SDCARD/miyoo/lib/libpadsp.so prompt -t "JOIN - Netplay type" \
-		"Standard Netplay (Use current Wifi)" \
-		"Easy Netplay (play anywhere, local only)" \
+	LD_PRELOAD=/mnt/SDCARD/miyoo/lib/libpadsp.so prompt -t "THAM GIA - Kiểu Netplay" \
+		"Netplay chuẩn (Sử dụng Wifi hiện tại)" \
+		"Easy Netplay (chơi ở bất cứ đâu, cục bộ)" \
 		"$EasyNetplayPokemon"
 
 	retcode=$?

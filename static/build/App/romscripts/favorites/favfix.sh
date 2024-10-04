@@ -1,4 +1,4 @@
 #!/bin/sh
-scriptlabel="Repair favorites"
+scriptlabel="Sửa mục ưa thích"
 
 tools favfix

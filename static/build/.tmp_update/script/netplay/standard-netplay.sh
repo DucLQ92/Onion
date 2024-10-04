@@ -61,7 +61,7 @@ Get_NetplayCore() {
 
 	if [ -n "$netplaycore" ]; then
 		if [ "$netplaycore" = "none" ]; then
-			build_infoPanel_and_log "Netplay impossible" "$platform not compatible with Netplay"
+			build_infoPanel_and_log "Không thể Netplay" "$platform không tương thích với Netplay"
 			sleep 3
 			return 1
 		fi

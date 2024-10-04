@@ -8,7 +8,7 @@ recentlist=/mnt/SDCARD/Roms/recentlist.json
 recentlist_hidden=/mnt/SDCARD/Roms/recentlist-hidden.json
 recentlist_temp=/tmp/recentlist-temp.json
 
-UI_TITLE="OPTIONS"
+UI_TITLE="TUỲ CHỌN"
 
 mkdir -p $radir/cores/cache
 
@@ -110,9 +110,9 @@ main() {
     fi
 
     if [ $current_tab -eq $TAB_FAVORITES ]; then
-        emulabel="Favorites"
+        emulabel="Ưa thích"
     elif [ $current_tab -eq $TAB_RECENTS ]; then
-        emulabel="Recents"
+        emulabel="Gần đây"
     fi
 
     echo "cmd: $cmd"
@@ -139,7 +139,7 @@ main() {
     if [ $skip_game_options -eq 0 ]; then
         get_core_info
 
-        game_core_label="Game core"
+        game_core_label="Giả lập"
 
         if [ ! -f "$radir/cores/$default_core.so" ]; then
             default_core=""
@@ -151,15 +151,15 @@ main() {
             coreinfo=$(cat "$coreinfopath")
             corename=$(get_info_value "$coreinfo" corename)
 
-            game_core_label="Game core: $corename"
+            game_core_label="Giả lập: $corename"
 
             if [ "$retroarch_core" == "$default_core" ]; then
-                game_core_label="$game_core_label (Default)"
+                game_core_label="$game_core_label (Mặc định)"
             else
                 add_reset_core=1
             fi
 
-            add_menu_option reset_game "Reset game"
+            add_menu_option reset_game "Thiết lập lại trò chơi"
         fi
 
         romdirname=$(echo "$rompath" | sed "s/^.*Roms\///g" | cut -d "/" -f1)
@@ -169,28 +169,28 @@ main() {
         echo "manpath: $manpath"
 
         if [ -f "$manpath" ]; then
-            add_menu_option open_manual "Game manual"
+            add_menu_option open_manual "Hướng dẫn chơi"
         fi
 
         add_menu_option change_core "$game_core_label"
 
         if [ $add_reset_core -eq 1 ]; then
-            add_menu_option reset_core "Restore default core"
+            add_menu_option reset_core "Khôi phục giả lập mặc định"
         fi
     fi # skip_game_options
 
     if [ $current_tab -eq $TAB_GAMES ]; then
         if [ -f "$emupath/active_filter" ]; then
             filter_kw=$(cat "$emupath/active_filter")
-            add_menu_option clear_filter "Clear filter"
-            add_menu_option filter_roms "Filter: $filter_kw"
+            add_menu_option clear_filter "Bỏ lọc"
+            add_menu_option filter_roms "Lọc: $filter_kw"
         else
-            add_menu_option filter_roms "Filter list"
+            add_menu_option filter_roms "Danh sách lọc"
         fi
     fi
 
     if [ $current_tab -eq $TAB_GAMES ] || [ $current_tab -eq $TAB_EXPERT ]; then
-        add_menu_option refresh_roms "Refresh list"
+        add_menu_option refresh_roms "Làm mới danh sách"
     fi
 
     add_script_files "$globalscriptdir"
@@ -412,7 +412,7 @@ change_core() {
 
             if [ "$tmp_core" == "$default_core" ]; then
                 is_valid=1
-                tmp_corename="$tmp_corename (Default)"
+                tmp_corename="$tmp_corename (Mặc định)"
             fi
 
             if [ "$tmp_core" == "$retroarch_core" ]; then
@@ -443,11 +443,11 @@ change_core() {
     echo "corenames: $available_corenames"
 
     if [ $is_valid -eq 0 ]; then
-        infoPanel --title "GAME CORE (.$ext)" --message "Not available for this rom\n(.$ext files)" --auto
+        infoPanel --title "GIẢ LẬP (.$ext)" --message "Không có sẵn cho tệp này\n(tệp .$ext)" --auto
         exit 1
     fi
 
-    runcmd="LD_PRELOAD=/mnt/SDCARD/miyoo/lib/libpadsp.so ./bin/prompt -t \"GAME CORE (.$ext)\" -s $selected_index $available_corenames"
+    runcmd="LD_PRELOAD=/mnt/SDCARD/miyoo/lib/libpadsp.so ./bin/prompt -t \"GIẢ LẬP (.$ext)\" -s $selected_index $available_corenames"
     eval $runcmd
     retcode=$?
 

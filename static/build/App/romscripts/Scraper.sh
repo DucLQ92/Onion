@@ -1,5 +1,5 @@
 #!/bin/sh
-scriptlabel="Scraper (%LIST%)"
+scriptlabel="Lấy thông tin - Scraper (%LIST%)"
 require_networking=1
 echo $0 $*
 

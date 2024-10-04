@@ -1,5 +1,5 @@
 #!/bin/sh
-scriptlabel="Random game (%LIST%)"
+scriptlabel="Chơi ngẫu nhiên (%LIST%)"
 
 TAB_GAMES=1
 TAB_FAVORITES=2

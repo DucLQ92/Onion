@@ -1,4 +1,4 @@
 #!/bin/sh
-scriptlabel="Sort favorites (A-Z)"
+scriptlabel="Sắp xếp mục ưa thích (A-Z)"
 
 tools favsort

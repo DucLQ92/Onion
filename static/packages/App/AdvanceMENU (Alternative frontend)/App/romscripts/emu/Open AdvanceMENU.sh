@@ -1,4 +1,5 @@
 #!/bin/sh
+scriptlabel="Mở AdvanceMENU"
 emupath="$2"
 sysdir=/mnt/SDCARD/.tmp_update
 advmenu_rc_path=/mnt/SDCARD/BIOS/.advance/advmenu.rc

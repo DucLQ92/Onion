@@ -1,4 +1,4 @@
 #!/bin/sh
-scriptlabel="Clean recents (remove apps)"
+scriptlabel="Xoá gần đây (xóa ứng dụng)"
 
 tools recents --clean_all
