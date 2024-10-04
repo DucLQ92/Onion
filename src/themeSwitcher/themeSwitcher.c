@@ -57,7 +57,7 @@ SDL_Surface *createBottomBar(TTF_Font *font)
     SDL_BlitSurface(surfaceButtonB, NULL, surface, &pos);
     pos.x += surfaceButtonB->w + 10;
 
-    text = TTF_RenderUTF8_Blended(font, "HUỶ", (SDL_Color){255, 255, 255});
+    text = TTF_RenderUTF8_Blended(font, "HUY", (SDL_Color){255, 255, 255});
     pos.y = 35 - text->h / 2 - 3;
     SDL_BlitSurface(text, NULL, surface, &pos);
     pos.x += text->w + 20;
@@ -67,7 +67,7 @@ SDL_Surface *createBottomBar(TTF_Font *font)
     SDL_BlitSurface(surfaceButtonX, NULL, surface, &pos);
     pos.x += surfaceButtonX->w + 10;
 
-    text = TTF_RenderUTF8_Blended(font, "BÂT/TẮT BIỂU TƯỢNG",
+    text = TTF_RenderUTF8_Blended(font, "BAT/TAT BIEU TUONG",
                                   (SDL_Color){255, 255, 255});
     pos.y = 35 - text->h / 2 - 3;
     SDL_BlitSurface(text, NULL, surface, &pos);
@@ -393,8 +393,8 @@ int main(int argc, char *argv[])
 
             rectThemeName.x = 60;
             char msg[STR_MAX];
-            sprintf(msg, "%s [%s]", has_icons ? "Áp dụng biểu tượng" : "Đặt lại biểu tượng",
-                    apply_icons ? "BẬT" : "TẮT");
+            sprintf(msg, "%s [%s]", has_icons ? "Ap dung bieu tuong" : "Dat lai bieu tuong",
+                    apply_icons ? "BAT" : "TAT");
             imagePages = TTF_RenderUTF8_Blended(font21, msg, color_white);
             SDL_BlitSurface(imagePages, NULL, screen, &rectThemeName);
             SDL_FreeSurface(imagePages);

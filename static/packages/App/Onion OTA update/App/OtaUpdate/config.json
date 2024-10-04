@@ -1,5 +1,5 @@
 {
-	"label": "Onion OTA update",
+	"label": "Cập nhật Onion",
 	"icon": "/mnt/SDCARD/Icons/Default/app/pacman.png",
 	"launch": "launch.sh",
 	"description": "Cập nhật Onion qua internet"

@@ -322,7 +322,7 @@ int main(int argc, char *argv[])
                 26 + (select_cursor * 24) + (select_cursor > 2 ? 16 : 0), 50);
         }
 
-        PrintWhiteString("Start: Cap nhat thoi gian/Thoat", sdl_screen, 10, 70);
+        PrintWhiteString("Start: Cap nhat/Thoat", sdl_screen, 10, 70);
         PrintWhiteString("B: Thoat", sdl_screen, 10, 90);
 
         /* Print back buffer to the final screen */
