@@ -29,39 +29,39 @@
 void menu_systemStartup(void *_)
 {
     if (!_menu_system_startup._created) {
-        _menu_system_startup = list_createWithTitle(3, LIST_SMALL, "Startup");
+        _menu_system_startup = list_createWithTitle(3, LIST_SMALL, "Khởi động");
 
         list_addItemWithInfoNote(&_menu_system_startup,
                                  (ListItem){
-                                     .label = "Auto-resume last game",
+                                     .label = "Tự động tiếp tục trò chơi cuối cùng",
                                      .item_type = TOGGLE,
                                      .value = (int)settings.startup_auto_resume,
                                      .action = action_setStartupAutoResume},
-                                 "Auto-resume happens when you shutdown\n"
-                                 "the device while a game is running.\n"
-                                 "At startup, the system will resume\n"
-                                 "where you left off last time.");
+                                 "Tính năng tự động tiếp tục xảy ra khi\n"
+                                 "bạn tắt thiết bị trong khi trò chơi đang\n"
+                                 "chạy. Khi khởi động, hệ thống sẽ tiếp\n"
+                                 "tục từ nơi bạn dừng lại lần trước.");
         list_addItemWithInfoNote(&_menu_system_startup,
                                  (ListItem){
-                                     .label = "Start application",
+                                     .label = "Ứng dụng khởi động",
                                      .item_type = MULTIVALUE,
                                      .value_max = 3,
                                      .value_labels = {"MainUI", "GameSwitcher", "RetroArch", "AdvanceMENU"},
                                      .value = settings.startup_application,
                                      .action = action_setStartupApplication},
-                                 "With this option you can choose which\n"
-                                 "frontend you want to launch into on\n"
-                                 "startup.");
+                                 "Với tùy chọn này, bạn có thể chọn\n"
+                                 "giao diện mà bạn muốn khởi chạy khi\n"
+                                 "khởi động.");
         list_addItemWithInfoNote(&_menu_system_startup,
                                  (ListItem){
-                                     .label = "MainUI: Start tab",
+                                     .label = "MainUI: Tab bắt đầu",
                                      .item_type = MULTIVALUE,
                                      .value_max = 5,
                                      .value_formatter = formatter_startupTab,
                                      .value = settings.startup_tab,
                                      .action = action_setStartupTab},
-                                 "Here you can set which tab you want\n"
-                                 "MainUI to launch into.");
+                                 "Tại đây bạn có thể thiết lập tab\n"
+                                 "mà bạn muốn khi MainUI khởi chạy.");
     }
     menu_stack[++menu_level] = &_menu_system_startup;
     header_changed = true;
@@ -70,7 +70,7 @@ void menu_systemStartup(void *_)
 void menu_systemDisplay(void *_)
 {
     if (!_menu_system_display._created) {
-        _menu_system_display = list_createWithTitle(1, LIST_SMALL, "Display");
+        _menu_system_display = list_createWithTitle(1, LIST_SMALL, "Hiển thị");
     }
     menu_stack[++menu_level] = &_menu_system_display;
     header_changed = true;
@@ -81,7 +81,7 @@ bool _writeDateString(char *label_out)
     char new_label[STR_MAX];
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
-    strftime(new_label, STR_MAX - 1, "Now: %Y-%m-%d %H:%M:%S", &tm);
+    strftime(new_label, STR_MAX - 1, "Bây giờ: %Y-%m-%d %H:%M:%S", &tm);
     if (strncmp(new_label, label_out, STR_MAX) != 0) {
         strcpy(label_out, new_label);
         return true;
@@ -93,7 +93,7 @@ void menu_datetime(void *_)
 {
     if (!_menu_date_time._created) {
         _menu_date_time = list_create(6, LIST_SMALL);
-        strcpy(_menu_date_time.title, "Date and time");
+        strcpy(_menu_date_time.title, "Ngày và giờ");
         list_addItem(&_menu_date_time,
                      (ListItem){
                          .label = "[DATESTRING]",
@@ -105,64 +105,64 @@ void menu_datetime(void *_)
         if (DEVICE_ID == MIYOO354 || network_state.ntp) {
             list_addItemWithInfoNote(&_menu_date_time,
                                      (ListItem){
-                                         .label = "Set automatically via internet",
+                                         .label = "Tự động đồng bộ qua Internet",
                                          .item_type = TOGGLE,
                                          .value = (int)network_state.ntp,
                                          .action = network_setNtpState},
-                                     "Use the internet connection to sync\n"
-                                     "date and time on startup.");
+                                     "Sử dụng kết nối Internet để đồng bộ\n"
+                                     "ngày và giờ khi khởi động.");
         }
         if (DEVICE_ID == MIYOO354) {
             list_addItemWithInfoNote(&_menu_date_time,
                                      (ListItem){
-                                         .label = "Wait for sync on startup",
+                                         .label = "Chờ đồng bộ khi khởi động",
                                          .item_type = TOGGLE,
                                          .disabled = !network_state.ntp,
                                          .value = (int)network_state.ntp_wait,
                                          .action = network_setNtpWaitState},
-                                     "Wait for date and time synchronization\n"
-                                     "on system startup."
+                                     "Chờ ngày và giờ được đồng bộ\n"
+                                     "khi khởi động hệ thống."
                                      " \n"
-                                     "Ensures that time is synced before a game\n"
-                                     "is launched.");
+                                     "Đảm bảo thời gian được đồng bộ\n"
+                                     "trước khi trò chơi được khởi chạy.");
             list_addItemWithInfoNote(&_menu_date_time,
                                      (ListItem){
-                                         .label = "Get time zone via IP address",
+                                         .label = "Nhận múi giờ qua địa chỉ IP",
                                          .item_type = TOGGLE,
                                          .disabled = !network_state.ntp,
                                          .value = !network_state.manual_tz,
                                          .action = network_setTzManualState},
-                                     "If this is enabled, the system will try\n"
-                                     "to retrieve your time zone from your IP\n"
-                                     "address."
+                                     "Nếu tính năng này được bật, hệ thống sẽ\n"
+                                     "cố gắng lấy múi giờ từ địa chỉ IP\n"
+                                     "của bạn."
                                      " \n"
-                                     "It might be beneficial to disable this\n"
-                                     "option if you're on a VPN.");
+                                     "Có thể hữu ích khi tắt tùy chọn này\n"
+                                     "nếu bạn đang sử dụng VPN.");
             list_addItemWithInfoNote(&_menu_date_time,
                                      (ListItem){
-                                         .label = "Select time zone",
+                                         .label = "Chọn múi giờ",
                                          .item_type = MULTIVALUE,
                                          .disabled = !network_state.ntp || !network_state.manual_tz,
                                          .value_max = 48,
                                          .value_formatter = formatter_timezone,
                                          .value = value_timezone(),
                                          .action = network_setTzSelectState},
-                                     "Manually set your time zone.\n"
-                                     "You need to adjust for DST as well.");
+                                     "Cài đặt múi giờ theo cách thủ công.\n"
+                                     "Bạn cũng cần phải điều chỉnh theo DST.");
         }
         list_addItemWithInfoNote(&_menu_date_time,
                                  (ListItem){
-                                     .label = "Emulated time skip",
+                                     .label = "Bỏ qua thời gian mô phỏng",
                                      .item_type = MULTIVALUE,
                                      .disabled = network_state.ntp,
                                      .value_max = 24,
                                      .value_formatter = formatter_timeSkip,
                                      .value = settings.time_skip,
                                      .action = action_setTimeSkip},
-                                 "Without RTC the system time stands still\n"
-                                 "while the device is off.\n"
-                                 "This option lets you add a specific amount\n"
-                                 "of hours at startup.");
+                                 "Nếu không có RTC, thời gian của\n"
+                                 "hệ thống sẽ đứng yên khi thiết bị tắt.\n"
+                                 "Tùy chọn này cho phép bạn thêm\n"
+                                 "một lượng giờ cụ thể khi khởi động.");
     }
     _writeDateString(_menu_date_time.items[0].label);
     menu_stack[++menu_level] = &_menu_date_time;
@@ -172,10 +172,10 @@ void menu_datetime(void *_)
 void menu_system(void *_)
 {
     if (!_menu_system._created) {
-        _menu_system = list_createWithTitle(6, LIST_SMALL, "System");
+        _menu_system = list_createWithTitle(6, LIST_SMALL, "Hệ thống");
         list_addItem(&_menu_system,
                      (ListItem){
-                         .label = "Startup...",
+                         .label = "Khởi động...",
                          .action = menu_systemStartup});
         // list_addItem(&_menu_system,
         //              (ListItem){
@@ -183,39 +183,39 @@ void menu_system(void *_)
         //                  .action = menu_systemDisplay});
         list_addItem(&_menu_system,
                      (ListItem){
-                         .label = "Date and time...",
+                         .label = "Ngày và giờ...",
                          .action = menu_datetime});
         list_addItemWithInfoNote(&_menu_system,
                                  (ListItem){
-                                     .label = "Low battery warning",
+                                     .label = "Cản báp pin yếu",
                                      .item_type = MULTIVALUE,
                                      .value_max = 5,
                                      .value_formatter = formatter_battWarn,
                                      .value = settings.low_battery_warn_at / 5,
                                      .action = action_setLowBatteryWarnAt},
-                                 "Show a red battery icon warning in the\n"
-                                 "top right corner, when battery is at or\n"
-                                 "below this value.");
+                                 "Hiển thị cảnh báo biểu tượng pin màu đỏ\n"
+                                 "ở góc trên bên phải khi pin ở mức hoặc\n"
+                                 "thấp hơn giá trị này.");
         list_addItemWithInfoNote(&_menu_system,
                                  (ListItem){
-                                     .label = "Low batt.: Save and exit",
+                                     .label = "Pin yếu: Lưu và Thoát",
                                      .item_type = MULTIVALUE,
                                      .value_max = 5,
                                      .value_formatter = formatter_battExit,
                                      .value = settings.low_battery_autosave_at,
                                      .action = action_setLowBatteryAutoSave},
-                                 "Set the battery percentage at which the\n"
-                                 "system should save and exit RetroArch.");
+                                 "Đặt phần trăm pin mà hệ thống sẽ\n"
+                                 "lưu và thoát khỏi RetroArch.");
         list_addItemWithInfoNote(&_menu_system,
                                  (ListItem){
-                                     .label = "Vibration intensity",
+                                     .label = "Cường độ rung",
                                      .item_type = MULTIVALUE,
                                      .value_max = 3,
-                                     .value_labels = {"Off", "Low", "Normal", "High"},
+                                     .value_labels = {"Tắt", "Nhẹ", "Thường", "Mạnh"},
                                      .value = settings.vibration,
                                      .action = action_setVibration},
-                                 "Set the vibration strength for haptic\n"
-                                 "feedback, when pressing system shortcuts.");
+                                 "Cài đặt cường độ rung cho phản hồi\n"
+                                 "xúc giác khi nhấn phím tắt hệ thống.");
     }
     menu_stack[++menu_level] = &_menu_system;
     header_changed = true;
@@ -225,40 +225,40 @@ void menu_buttonActionMainUIMenu(void *_)
 {
     if (!_menu_button_action_mainui_menu._created) {
         _menu_button_action_mainui_menu = list_create(3, LIST_SMALL);
-        strcpy(_menu_button_action_mainui_menu.title, "MainUI: Menu button");
+        strcpy(_menu_button_action_mainui_menu.title, "MainUI: Nút Menu");
         list_addItemWithInfoNote(&_menu_button_action_mainui_menu,
                                  (ListItem){
-                                     .label = "Single press",
+                                     .label = "Nhấn một lần",
                                      .item_type = MULTIVALUE,
                                      .value_max = 2,
                                      .value_labels = BUTTON_MAINUI_LABELS,
                                      .value = settings.mainui_single_press,
                                      .action_id = 0,
                                      .action = action_setMenuButtonKeymap},
-                                 "Set the action for single pressing\n"
-                                 "the menu button while in MainUI.");
+                                 "Cài đặt hành động nhấn một lần\n"
+                                 "vào nút menu khi đang ở MainUI.");
         list_addItemWithInfoNote(&_menu_button_action_mainui_menu,
                                  (ListItem){
-                                     .label = "Long press",
+                                     .label = "Nhấn giữ",
                                      .item_type = MULTIVALUE,
                                      .value_max = 2,
                                      .value_labels = BUTTON_MAINUI_LABELS,
                                      .value = settings.mainui_long_press,
                                      .action_id = 1,
                                      .action = action_setMenuButtonKeymap},
-                                 "Set the action for long pressing\n"
-                                 "the menu button while in MainUI.");
+                                 "Thiết lập hành động Nhấn giữ\n"
+                                 "vào nút menu khi đang ở MainUI.");
         list_addItemWithInfoNote(&_menu_button_action_mainui_menu,
                                  (ListItem){
-                                     .label = "Double press",
+                                     .label = "Nhấn đúp",
                                      .item_type = MULTIVALUE,
                                      .value_max = 2,
                                      .value_labels = BUTTON_MAINUI_LABELS,
                                      .value = settings.mainui_double_press,
                                      .action_id = 2,
                                      .action = action_setMenuButtonKeymap},
-                                 "Set the action for double pressing\n"
-                                 "the menu button while in MainUI.");
+                                 "Thiết lập hành động Nhấn đúp\n"
+                                 "vào nút menu khi đang ở MainUI.");
     }
     menu_stack[++menu_level] = &_menu_button_action_mainui_menu;
     header_changed = true;
@@ -267,40 +267,40 @@ void menu_buttonActionMainUIMenu(void *_)
 void menu_buttonActionInGameMenu(void *_)
 {
     if (!_menu_button_action_ingame_menu._created) {
-        _menu_button_action_ingame_menu = list_createWithTitle(3, LIST_SMALL, "In-game: Menu button");
+        _menu_button_action_ingame_menu = list_createWithTitle(3, LIST_SMALL, "Trong trò chơi: Nút Menu");
         list_addItemWithInfoNote(&_menu_button_action_ingame_menu,
                                  (ListItem){
-                                     .label = "Single press",
+                                     .label = "Nhấn một lần",
                                      .item_type = MULTIVALUE,
                                      .value_max = 3,
                                      .value_labels = BUTTON_INGAME_LABELS,
                                      .value = settings.ingame_single_press,
                                      .action_id = 3,
                                      .action = action_setMenuButtonKeymap},
-                                 "Set the action for single pressing\n"
-                                 "the menu button while in-game.");
+                                 "Cài đặt hành động nhấn một lần\n"
+                                 "vào nút menu khi đang trong trò chơi.");
         list_addItemWithInfoNote(&_menu_button_action_ingame_menu,
                                  (ListItem){
-                                     .label = "Long press",
+                                     .label = "Nhấn giữ",
                                      .item_type = MULTIVALUE,
                                      .value_max = 3,
                                      .value_labels = BUTTON_INGAME_LABELS,
                                      .value = settings.ingame_long_press,
                                      .action_id = 4,
                                      .action = action_setMenuButtonKeymap},
-                                 "Set the action for long pressing\n"
-                                 "the menu button while in-game.");
+                                 "Cài đặt hành động nhấn giữ\n"
+                                 "vào nút menu khi đang trong trò chơi.");
         list_addItemWithInfoNote(&_menu_button_action_ingame_menu,
                                  (ListItem){
-                                     .label = "Double press",
+                                     .label = "Nhấn đúp",
                                      .item_type = MULTIVALUE,
                                      .value_max = 3,
                                      .value_labels = BUTTON_INGAME_LABELS,
                                      .value = settings.ingame_double_press,
                                      .action_id = 5,
                                      .action = action_setMenuButtonKeymap},
-                                 "Set the action for double pressing\n"
-                                 "the menu button while in-game.");
+                                 "Cài đặt hành động nhấn đúp\n"
+                                 "vào nút menu khi đang trong trò chơi.");
     }
     menu_stack[++menu_level] = &_menu_button_action_ingame_menu;
     header_changed = true;
@@ -309,55 +309,55 @@ void menu_buttonActionInGameMenu(void *_)
 void menu_buttonAction(void *_)
 {
     if (!_menu_button_action._created) {
-        _menu_button_action = list_createWithTitle(6, LIST_SMALL, "Button shortcuts");
+        _menu_button_action = list_createWithTitle(6, LIST_SMALL, "Nút phím tắt");
         list_addItemWithInfoNote(&_menu_button_action,
                                  (ListItem){
-                                     .label = "Menu single press vibration",
+                                     .label = "Rung khi nhấn nút Menu",
                                      .item_type = TOGGLE,
                                      .value = (int)settings.menu_button_haptics,
                                      .action = action_setMenuButtonHaptics},
-                                 "Enable haptic feedback for menu button\n"
-                                 "single and double press.");
+                                 "Bật phản hồi xúc giác khi nhấn một\n"
+                                 "lần và nhấn đúp vào nút menu.");
         list_addItem(&_menu_button_action,
                      (ListItem){
-                         .label = "In-game: Menu button...",
+                         .label = "Trong trò chơi: Nút Menu...",
                          .action = menu_buttonActionInGameMenu});
         list_addItem(&_menu_button_action,
                      (ListItem){
-                         .label = "MainUI: Menu button...",
+                         .label = "MainUI: Nút Menu...",
                          .action = menu_buttonActionMainUIMenu});
 
         getInstalledApps(true);
         list_addItemWithInfoNote(&_menu_button_action,
                                  (ListItem){
-                                     .label = "MainUI: X button",
+                                     .label = "MainUI: Nút X",
                                      .item_type = MULTIVALUE,
                                      .value_max = installed_apps_count + NUM_TOOLS,
                                      .value = value_appShortcut(0),
                                      .value_formatter = formatter_appShortcut,
                                      .action_id = 0,
                                      .action = action_setAppShortcut},
-                                 "Set the X button action in MainUI.");
+                                 "Thiết lập hành động của nút X trong MainUI.");
         list_addItemWithInfoNote(&_menu_button_action,
                                  (ListItem){
-                                     .label = "MainUI: Y button",
+                                     .label = "MainUI: Nút Y",
                                      .item_type = MULTIVALUE,
                                      .value_max = installed_apps_count + NUM_TOOLS + 1,
                                      .value = value_appShortcut(1),
                                      .value_formatter = formatter_appShortcut,
                                      .action_id = 1,
                                      .action = action_setAppShortcut},
-                                 "Set the Y button action in MainUI.");
+                                 "Thiết lập hành động của nút Y trong MainUI.");
         list_addItemWithInfoNote(&_menu_button_action,
                                  (ListItem){
-                                     .label = "Power single press",
+                                     .label = "Nhấn một lần nút nguồn",
                                      .item_type = MULTIVALUE,
                                      .value_max = 1,
-                                     .value_labels = {"Standby", "Shutdown"},
+                                     .value_labels = {"Chế độ chờ", "Tắt máy"},
                                      .value = (int)settings.disable_standby,
                                      .action = action_setDisableStandby},
-                                 "Change the power button single press\n"
-                                 "action to either 'standby' or 'shutdown'.");
+                                 "Thay đổi hành động nhấn một lần nút nguồn\n"
+                                 "thành 'Chế độ chờ' hoặc 'Tắt máy'.");
     }
     menu_stack[++menu_level] = &_menu_button_action;
     header_changed = true;
@@ -366,10 +366,10 @@ void menu_buttonAction(void *_)
 void menu_batteryPercentage(void *_)
 {
     if (!_menu_battery_percentage._created) {
-        _menu_battery_percentage = list_createWithTitle(7, LIST_SMALL, "Battery percentage");
+        _menu_battery_percentage = list_createWithTitle(7, LIST_SMALL, "Phần trăm pin");
         list_addItem(&_menu_battery_percentage,
                      (ListItem){
-                         .label = "Visible",
+                         .label = "Hiện",
                          .item_type = MULTIVALUE,
                          .value_max = 2,
                          .value_labels = THEME_TOGGLE_LABELS,
@@ -377,7 +377,7 @@ void menu_batteryPercentage(void *_)
                          .action = action_batteryPercentageVisible});
         list_addItem(&_menu_battery_percentage,
                      (ListItem){
-                         .label = "Font family",
+                         .label = "Phông chữ",
                          .item_type = MULTIVALUE,
                          .value_max = num_font_families,
                          .value_formatter = formatter_fontFamily,
@@ -385,7 +385,7 @@ void menu_batteryPercentage(void *_)
                          .action = action_batteryPercentageFontFamily});
         list_addItem(&_menu_battery_percentage,
                      (ListItem){
-                         .label = "Font size",
+                         .label = "Cỡ chữ",
                          .item_type = MULTIVALUE,
                          .value_max = num_font_sizes,
                          .value_formatter = formatter_fontSize,
@@ -393,15 +393,15 @@ void menu_batteryPercentage(void *_)
                          .action = action_batteryPercentageFontSize});
         list_addItem(&_menu_battery_percentage,
                      (ListItem){
-                         .label = "Text alignment",
+                         .label = "Căn chỉnh chữ",
                          .item_type = MULTIVALUE,
                          .value_max = 3,
-                         .value_labels = {"-", "Left", "Center", "Right"},
+                         .value_labels = {"-", "Trái", "Giữa", "Phải"},
                          .value = value_batteryPercentagePosition(),
                          .action = action_batteryPercentagePosition});
         list_addItem(&_menu_battery_percentage,
                      (ListItem){
-                         .label = "Fixed position",
+                         .label = "Vị trí cố định",
                          .item_type = MULTIVALUE,
                          .value_max = 2,
                          .value_labels = THEME_TOGGLE_LABELS,
@@ -409,7 +409,7 @@ void menu_batteryPercentage(void *_)
                          .action = action_batteryPercentageFixed});
         list_addItem(&_menu_battery_percentage,
                      (ListItem){
-                         .label = "Horizontal offset",
+                         .label = "Độ lệch ngang",
                          .item_type = MULTIVALUE,
                          .value_max = BATTPERC_MAX_OFFSET * 2 + 1,
                          .value_formatter = formatter_positionOffset,
@@ -417,7 +417,7 @@ void menu_batteryPercentage(void *_)
                          .action = action_batteryPercentageOffsetX});
         list_addItem(&_menu_battery_percentage,
                      (ListItem){
-                         .label = "Vertical offset",
+                         .label = "Độ lệch dọc",
                          .item_type = MULTIVALUE,
                          .value_max = BATTPERC_MAX_OFFSET * 2 + 1,
                          .value_formatter = formatter_positionOffset,
@@ -432,36 +432,36 @@ void menu_themeOverrides(void *_)
 {
     if (!_menu_theme_overrides._created) {
         _menu_theme_overrides = list_create(7, LIST_SMALL);
-        strcpy(_menu_theme_overrides.title, "Theme overrides");
+        strcpy(_menu_theme_overrides.title, "Ghi đè chủ đề");
         list_addItem(&_menu_theme_overrides,
                      (ListItem){
-                         .label = "Battery percentage...",
+                         .label = "Phần trăm pin...",
                          .action = menu_batteryPercentage});
         list_addItemWithInfoNote(&_menu_theme_overrides,
                                  (ListItem){
-                                     .label = "Mute background music",
+                                     .label = "Tắt nhạc nền",
                                      .item_type = TOGGLE,
                                      .value = settings.bgm_mute,
                                      .action = action_toggleBackgroundMusic},
-                                 "Mute background music for themes");
+                                 "Tắt tiếng nhạc nền cho chủ đề");
         list_addItemWithInfoNote(&_menu_theme_overrides,
                                  (ListItem){
-                                     .label = "Hide icon labels",
+                                     .label = "Ẩn nhãn biểu tượng",
                                      .item_type = MULTIVALUE,
                                      .value_max = 2,
                                      .value_labels = THEME_TOGGLE_LABELS,
                                      .value = value_hideLabelsIcons(),
                                      .action = action_hideLabelsIcons},
-                                 "Hide the labels under the main menu icons.");
+                                 "Ẩn nhãn bên dưới các biểu tượng menu chính.");
         list_addItemWithInfoNote(&_menu_theme_overrides,
                                  (ListItem){
-                                     .label = "Hide hint labels",
+                                     .label = "Ẩn nhãn gợi ý",
                                      .item_type = MULTIVALUE,
                                      .value_max = 2,
                                      .value_labels = THEME_TOGGLE_LABELS,
                                      .value = value_hideLabelsHints(),
                                      .action = action_hideLabelsHints},
-                                 "Hide the labels at the bottom of the screen.");
+                                 "Ẩn các nhãn ở dưới màn hình.");
         // list_addItem(&_menu_theme_overrides, (ListItem){
         // 	.label = "[Title] Font size", .item_type = MULTIVALUE,
         // .value_max = num_font_sizes, .value_formatter = formatter_fontSize
@@ -483,7 +483,7 @@ void menu_blueLight(void *_)
 {
     if (!_menu_user_blue_light._created) {
         network_loadState();
-        _menu_user_blue_light = list_createWithTitle(6, LIST_SMALL, "Blue light filter");
+        _menu_user_blue_light = list_createWithTitle(6, LIST_SMALL, "Bộ lọc ánh sáng xanh");
         if (DEVICE_ID == MIYOO354) {
             list_addItem(&_menu_user_blue_light,
                          (ListItem){
@@ -493,13 +493,13 @@ void menu_blueLight(void *_)
         }
         list_addItemWithInfoNote(&_menu_user_blue_light,
                                  (ListItem){
-                                     .label = "State",
+                                     .label = "Trạng thái",
                                      .disable_arrows = blf_changing,
                                      .disable_a_btn = blf_changing,
                                      .item_type = TOGGLE,
                                      .value = (int)settings.blue_light_state || exists("/tmp/.blfOn"),
                                      .action = action_blueLight},
-                                 "Set the selected strength now\n");
+                                 "Đặt cường độ đã chọn ngay bây giờ\n");
         if (DEVICE_ID == MIYOO354) {
             list_addItemWithInfoNote(&_menu_user_blue_light,
                                      (ListItem){
@@ -508,11 +508,11 @@ void menu_blueLight(void *_)
                                          .item_type = TOGGLE,
                                          .value = (int)settings.blue_light_schedule,
                                          .action = action_blueLightSchedule},
-                                     "Enable or disable the bluelight filter schedule\n");
+                                     "Bật hoặc tắt lịch trình lọc ánh sáng xanh\n");
         }
         list_addItemWithInfoNote(&_menu_user_blue_light,
                                  (ListItem){
-                                     .label = "Strength",
+                                     .label = "Độ mạnh",
                                      .item_type = MULTIVALUE,
                                      .disable_arrows = blf_changing,
                                      .disable_a_btn = blf_changing,
@@ -520,35 +520,35 @@ void menu_blueLight(void *_)
                                      .value_labels = BLUELIGHT_LABELS,
                                      .action = action_blueLightLevel,
                                      .value = value_blueLightLevel()},
-                                 "Change the strength of the \n"
-                                 "Blue light filter");
+                                 "Thay đổi cường độ của bộ lọc\n"
+                                 "ánh sáng xanh");
         if (DEVICE_ID == MIYOO354) {
             list_addItemWithInfoNote(&_menu_user_blue_light,
                                      (ListItem){
-                                         .label = "Time (On)",
+                                         .label = "Giờ (Bật)",
                                          .disabled = !network_state.ntp,
                                          .item_type = MULTIVALUE,
                                          .value_max = 95,
                                          .value_formatter = formatter_Time,
                                          .action = action_blueLightTimeOn,
                                          .value = value_blueLightTimeOn()},
-                                     "Time schedule for the bluelight filter");
+                                     "Lịch trình thời gian bật bộ lọc ánh sáng xanh");
             list_addItemWithInfoNote(&_menu_user_blue_light,
                                      (ListItem){
-                                         .label = "Time (Off)",
+                                         .label = "Giờ (Tắt)",
                                          .disabled = !network_state.ntp,
                                          .item_type = MULTIVALUE,
                                          .value_max = 95,
                                          .value_formatter = formatter_Time,
                                          .action = action_blueLightTimeOff,
                                          .value = value_blueLightTimeOff()},
-                                     "Time schedule for the bluelight filter");
+                                     "Lịch trình thời gian tắt bộ lọc ánh sáng xanh");
         }
     }
     if (DEVICE_ID == MIYOO354) {
         _writeDateString(_menu_user_blue_light.items[0].label);
         char scheduleToggleLabel[100];
-        strcpy(scheduleToggleLabel, exists("/tmp/.blfIgnoreSchedule") ? "Schedule (ignored)" : "Schedule");
+        strcpy(scheduleToggleLabel, exists("/tmp/.blfIgnoreSchedule") ? "Lịch trình (bỏ qua)" : "Lịch trình");
         strcpy(_menu_user_blue_light.items[2].label, scheduleToggleLabel);
     }
     menu_stack[++menu_level] = &_menu_user_blue_light;
@@ -560,46 +560,46 @@ void menu_userInterface(void *_)
     settings.blue_light_state = config_flag_get(".blfOn");
     all_changed = true;
     if (!_menu_user_interface._created) {
-        _menu_user_interface = list_createWithTitle(6, LIST_SMALL, "Appearance");
+        _menu_user_interface = list_createWithTitle(6, LIST_SMALL, "Giao diện");
         list_addItemWithInfoNote(&_menu_user_interface,
                                  (ListItem){
-                                     .label = "Show recents",
+                                     .label = "Hiển thị gần đây",
                                      .item_type = TOGGLE,
                                      .value = settings.show_recents,
                                      .action = action_setShowRecents},
-                                 "Toggle the visibility of the recents tab\n"
-                                 "in the main menu.");
+                                 "Chuyển đổi chế độ hiển thị của tab gần đây\n"
+                                 "trong menu chính.");
         list_addItemWithInfoNote(&_menu_user_interface,
                                  (ListItem){
-                                     .label = "Show expert mode",
+                                     .label = "Hiển thị chế độ chuyên gia",
                                      .item_type = TOGGLE,
                                      .value = settings.show_expert,
                                      .action = action_setShowExpert},
-                                 "Toggle the visibility of the expert tab\n"
-                                 "in the main menu.");
+                                 "Chuyển đổi chế độ hiển thị của tab chuyên gia\n"
+                                 "trong menu chính.");
         display_init();
         list_addItemWithInfoNote(&_menu_user_interface,
                                  (ListItem){
-                                     .label = "OSD bar size",
+                                     .label = "Kích thước thanh OSD",
                                      .item_type = MULTIVALUE,
                                      .value_max = 15,
                                      .value_formatter = formatter_meterWidth,
                                      .value = value_meterWidth(),
                                      .action = action_meterWidth},
-                                 "Set the width of the 'OSD bar' shown\n"
-                                 "in the left side of the display when\n"
-                                 "adjusting brightness, or volume (MMP).");
+                                 "Thiết lập chiều rộng của 'thanh OSD'\n"
+                                 "hiển thị ở phía bên trái màn hình khi\n"
+                                 "điều chỉnh độ sáng hoặc âm lượng (MMP).");
         list_addItem(&_menu_user_interface,
                      (ListItem){
-                         .label = "Blue light filter...",
+                         .label = "Bộ lọc ánh sáng xanh...",
                          .action = menu_blueLight});
         list_addItem(&_menu_user_interface,
                      (ListItem){
-                         .label = "Theme overrides...",
+                         .label = "Ghi đè chủ đề...",
                          .action = menu_themeOverrides});
         list_addItem(&_menu_user_interface,
                      (ListItem){
-                         .label = "Icons packs...",
+                         .label = "Gói biểu tượng...",
                          .action = menu_icons});
     }
     menu_stack[++menu_level] = &_menu_user_interface;
@@ -609,39 +609,39 @@ void menu_userInterface(void *_)
 void menu_resetSettings(void *_)
 {
     if (!_menu_reset_settings._created) {
-        _menu_reset_settings = list_createWithTitle(7, LIST_SMALL, "Reset settings");
+        _menu_reset_settings = list_createWithTitle(7, LIST_SMALL, "Thiết lập lại cài đặt");
         list_addItemWithInfoNote(&_menu_reset_settings,
                                  (ListItem){
-                                     .label = "Reset system tweaks",
+                                     .label = "Thiết lập lại các tinh chỉnh hệ thống",
                                      .action = action_resetTweaks},
-                                 "Reset all Onion system tweaks,\n"
-                                 "including network setup.");
+                                 "Thiết lập lại tất cả các tùy chỉnh của\n"
+                                 "hệ thống Onion, bao gồm cả thiết lập mạng.");
         list_addItem(&_menu_reset_settings,
                      (ListItem){
-                         .label = "Reset theme overrides",
+                         .label = "Đặt lại ghi đè chủ đề",
                          .action = action_resetThemeOverrides});
         list_addItemWithInfoNote(&_menu_reset_settings,
                                  (ListItem){
-                                     .label = "Reset MainUI settings",
+                                     .label = "Đặt lại cài đặt MainUI",
                                      .action = action_resetMainUI},
-                                 "Resets the settings stored on the device,\n"
-                                 "such as theme, display options, and volume.\n"
-                                 "Also resets WiFi configuration.");
+                                 "Đặt lại các cài đặt được lưu trữ trên thiết bị,\n"
+                                 "chẳng hạn như chủ đề, tùy chọn hiển thị và\n"
+                                 "âm lượng. Cũng đặt lại cấu hình WiFi.");
         list_addItem(&_menu_reset_settings,
                      (ListItem){
-                         .label = "Reset RetroArch main configuration",
+                         .label = "Đặt lại cấu hình chính của RetroArch",
                          .action = action_resetRAMain});
         list_addItem(&_menu_reset_settings,
                      (ListItem){
-                         .label = "Reset all RetroArch core overrides",
+                         .label = "Đặt lại tất cả các ghi đè lõi RetroArch",
                          .action = action_resetRACores});
         list_addItem(&_menu_reset_settings,
                      (ListItem){
-                         .label = "Reset AdvanceMENU/MAME/MESS",
+                         .label = "Đặt lại AdvanceMENU/MAME/MESS",
                          .action = action_resetAdvanceMENU});
         list_addItem(&_menu_reset_settings,
                      (ListItem){
-                         .label = "Reset everything", .action = action_resetAll});
+                         .label = "Thiết lập lại mọi thứ", .action = action_resetAll});
     }
     menu_stack[++menu_level] = &_menu_reset_settings;
     header_changed = true;
@@ -652,17 +652,17 @@ void menu_diagnostics(void *pt)
     if (!_menu_diagnostics._created) {
         diags_getEntries();
 
-        _menu_diagnostics = list_createWithSticky(1 + diags_numScripts, "Diagnostics");
+        _menu_diagnostics = list_createWithSticky(1 + diags_numScripts, "Chẩn đoán");
         list_addItemWithInfoNote(&_menu_diagnostics,
                                  (ListItem){
-                                     .label = "Enable logging",
-                                     .sticky_note = "Enable global logging",
+                                     .label = "Cho phép ghi nhật ký",
+                                     .sticky_note = "Cho phép ghi nhật ký hệ thống",
                                      .item_type = TOGGLE,
                                      .value = (int)settings.enable_logging,
                                      .action = action_setEnableLogging},
-                                 "Enable global logging, \n"
-                                 "for system & networking. \n \n"
-                                 "Logs will be generated in, \n"
+                                 "Bật ghi nhật ký,\n"
+                                 "cho hệ thống và mạng.\n \n"
+                                 "Nhật ký sẽ được tạo trong\n"
                                  "SD: /.tmp_update/logs.");
         for (int i = 0; i < diags_numScripts; i++) {
             ListItem diagItem = {
@@ -680,7 +680,7 @@ void menu_diagnostics(void *pt)
             }
 
             snprintf(diagItem.label, DIAG_MAX_LABEL_LENGTH - 1, "%s%.62s", prefix, scripts[i].label);
-            strncpy(diagItem.sticky_note, "Idle: Selected script not running", STR_MAX - 1);
+            strncpy(diagItem.sticky_note, "Nhàn rỗi: Tập lệnh đã chọn không chạy", STR_MAX - 1);
 
             char *parsed_Tooltip = diags_parseNewLines(scripts[i].tooltip);
             list_addItemWithInfoNote(&_menu_diagnostics, diagItem, parsed_Tooltip);
@@ -695,68 +695,68 @@ void menu_diagnostics(void *pt)
 void menu_advanced(void *_)
 {
     if (!_menu_advanced._created) {
-        _menu_advanced = list_createWithTitle(7, LIST_SMALL, "Advanced");
+        _menu_advanced = list_createWithTitle(7, LIST_SMALL, "Nâng cao");
         list_addItemWithInfoNote(&_menu_advanced,
                                  (ListItem){
-                                     .label = "Swap triggers (L<>L2, R<>R2)",
+                                     .label = "Hoán đổi các nút (L<>L2, R<>R2)",
                                      .item_type = TOGGLE,
                                      .value = value_getSwapTriggers(),
                                      .action = action_advancedSetSwapTriggers},
-                                 "Swap the function of L<>L2 and R<>R2\n"
-                                 "(only affects in-game actions).");
+                                 "Hoán đổi chức năng của L<>L2 và R<>R2\n"
+                                 "(chỉ ảnh hưởng đến các hành động trong trò chơi).");
         if (DEVICE_ID == MIYOO283) {
             list_addItemWithInfoNote(&_menu_advanced,
                                      (ListItem){
-                                         .label = "Brightness control",
+                                         .label = "Chỉnh độ sáng",
                                          .item_type = MULTIVALUE,
                                          .value_max = 1,
                                          .value_labels = {"SELECT+R2/L2",
                                                           "MENU+UP/DOWN"},
                                          .value = config_flag_get(".altBrightness"),
                                          .action = action_setAltBrightness},
-                                     "Change the shortcut for brightness.");
+                                     "Thay đổi phím tắt để tăng/giảm độ sáng.");
         }
         list_addItemWithInfoNote(&_menu_advanced,
                                  (ListItem){
-                                     .label = "Fast forward rate",
+                                     .label = "Tốc độ tua nhanh",
                                      .item_type = MULTIVALUE,
                                      .value_max = 50,
                                      .value = value_getFrameThrottle(),
                                      .value_formatter = formatter_fastForward,
                                      .action = action_advancedSetFrameThrottle},
-                                 "Set the maximum fast forward rate.");
+                                 "Đặt tốc độ tua nhanh tối đa.");
         list_addItemWithInfoNote(&_menu_advanced,
                                  (ListItem){
-                                     .label = "PWM frequency",
+                                     .label = "Tần số PWM",
                                      .item_type = MULTIVALUE,
                                      .value_max = 9,
                                      .value_labels = PWM_FREQUENCIES,
                                      .value = value_getPWMFrequency(),
                                      .action = action_advancedSetPWMFreqency},
-                                 "Change the PWM frequency\n"
-                                 "Lower values for less buzzing\n"
-                                 "Experimental feature");
+                                 "Thay đổi tần số PWM\n"
+                                 "Giá trị thấp hơn để giảm nhiễu\n"
+                                 "Tính năng thử nghiệm");
         if (DEVICE_ID == MIYOO354) {
             list_addItemWithInfoNote(&_menu_advanced,
                                      (ListItem){
-                                         .label = "LCD undervolt",
+                                         .label = "LCD hạ thế",
                                          .item_type = MULTIVALUE,
                                          .value_max = 4,
-                                         .value_labels = {"Off", "-0.1V", "-0.2V", "-0.3V", "-0.4V"},
+                                         .value_labels = {"Tắt", "-0.1V", "-0.2V", "-0.3V", "-0.4V"},
                                          .value = value_getLcdVoltage(),
                                          .action = action_advancedSetLcdVoltage},
-                                     "Use this option if you're seeing\n"
-                                     "small artifacts on the display.");
+                                     "Sử dụng tùy chọn này nếu bạn thấy\n"
+                                     "có hiện tượng nhiễu nhỏ trên màn hình.");
         }
         if (exists(RESET_CONFIGS_PAK)) {
             list_addItem(&_menu_advanced,
                          (ListItem){
-                             .label = "Reset settings...",
+                             .label = "Thiết lập lại cài đặt...",
                              .action = menu_resetSettings});
         }
         list_addItem(&_menu_advanced,
                      (ListItem){
-                         .label = "Diagnostics...",
+                         .label = "Chẩn đoán...",
                          .action = menu_diagnostics});
     }
     menu_stack[++menu_level] = &_menu_advanced;
@@ -766,64 +766,64 @@ void menu_advanced(void *_)
 void menu_screen_recorder(void *pt)
 {
     if (!_menu_screen_recorder._created) {
-        _menu_screen_recorder = list_createWithSticky(7, "Screen recorder setup");
+        _menu_screen_recorder = list_createWithSticky(7, "Thiết lập trình ghi màn hình");
         list_addItemWithInfoNote(&_menu_screen_recorder,
                                  (ListItem){
-                                     .label = "Start/stop recorder",
-                                     .sticky_note = "Status:...",
+                                     .label = "Bắt đầu/dừng ghi",
+                                     .sticky_note = "Trạng thái:...",
                                      .action = tool_screenRecorder},
-                                 "Start or stop the recorder");
+                                 "Bắt đầu hoặc dừng ghi màn hình");
         list_addItemWithInfoNote(&_menu_screen_recorder,
                                  (ListItem){
-                                     .label = "Countdown (seconds)",
-                                     .sticky_note = "Specify the countdown",
+                                     .label = "Đếm ngược (giây)",
+                                     .sticky_note = "Chỉ định đếm ngược",
                                      .item_type = MULTIVALUE,
                                      .value_max = 10,
                                      .value = (int)settings.rec_countdown,
                                      .action = action_toggleScreenRecCountdown},
-                                 "Countdown when starting recording. \n\n"
-                                 "The screen will pulse white n times \n"
-                                 "to signify recording has started/stopped");
+                                 "Đếm ngược khi bắt đầu ghi.\n\n"
+                                 "Màn hình sẽ nhấp nháy màu trắng n lần\n"
+                                 "để báo hiệu quá trình ghi đã bắt đầu/dừng");
         list_addItemWithInfoNote(&_menu_screen_recorder,
                                  (ListItem){
-                                     .label = "Toggle indicator icon",
-                                     .sticky_note = "Turn the indicator on/off",
+                                     .label = "Biểu tượng cảnh báo",
+                                     .sticky_note = "Bật/tắt Biểu tượng cảnh báo",
                                      .item_type = TOGGLE,
                                      .value = (int)settings.rec_indicator,
                                      .action = action_toggleScreenRecIndicator},
-                                 "Toggles the display of a\n"
-                                 "a flashing icon to remind you\n"
-                                 "that you're still recording.");
+                                 "Bật/tắt hiển thị biểu tượng\n"
+                                 "nhấp nháy để nhắc nhở bạn\n"
+                                 "rằng bạn vẫn đang ghi màn hình.");
         list_addItemWithInfoNote(&_menu_screen_recorder,
                                  (ListItem){
-                                     .label = "Toggle hotkey",
-                                     .sticky_note = "Turn the hotkey (Menu+A) on/off ",
+                                     .label = "Chuyển đổi phím nóng",
+                                     .sticky_note = "Bật/tắt phím nóng (Menu+A)",
                                      .item_type = TOGGLE,
                                      .value = (int)settings.rec_hotkey,
                                      .action = action_toggleScreenRecHotkey},
-                                 "Enable the hotkey function.\n\n"
-                                 "Recording can be started/stopped\n"
-                                 "with Menu+A");
+                                 "Bật chức năng phím nóng.\n\n"
+                                 "Có thể bắt đầu/dừng ghi hình\n"
+                                 "bằng Menu+A");
         list_addItemWithInfoNote(&_menu_screen_recorder,
                                  (ListItem){
-                                     .label = "Reset screen recorder",
-                                     .sticky_note = "Hard kill ffmpeg if it's crashed",
+                                     .label = "Đặt lại trình ghi màn hình",
+                                     .sticky_note = "Tắt hẳn ffmpeg nếu nó bị lỗi",
                                      .action = action_hardKillFFmpeg},
-                                 "Performs a hard kill of ffmpeg.\n\n"
-                                 "WARNING: If you're currently\n"
-                                 "recording, you may lose the file!");
+                                 "Thực hiện lệnh tắt ffmpeg.\n\n"
+                                 "CẢNH BÁO: Nếu bạn đang ghi hình,\n"
+                                 "bạn có thể bị mất tệp!");
         list_addItemWithInfoNote(&_menu_screen_recorder,
                                  (ListItem){
-                                     .label = "Delete all recordings",
-                                     .sticky_note = "Empties the recordings directory",
+                                     .label = "Xóa tất cả bản ghi hình",
+                                     .sticky_note = "Xóa tất cả bản ghi hình",
                                      .action = action_deleteAllRecordings},
-                                 "Deletes all recorded videos. \n\n"
-                                 "WARNING: This action cannot\n"
-                                 "be undone!");
+                                 "Xóa tất cả video đã ghi.\n\n"
+                                 "CẢNH BÁO: Không thể hoàn tác\n"
+                                 "hành động này!");
     }
 
     int isRecordingActive = exists("/tmp/recorder_active");
-    const char *recordingStatus = isRecordingActive ? "Status: Now recording..." : "Status: Idle.";
+    const char *recordingStatus = isRecordingActive ? "Trạng thái: Đang ghi..." : "Trạng thái: Rảnh.";
     strncpy(_menu_screen_recorder.items[0].sticky_note, recordingStatus, sizeof(_menu_screen_recorder.items[0].sticky_note) - 1);
     _menu_screen_recorder.items[0].sticky_note[sizeof(_menu_screen_recorder.items[0].sticky_note) - 1] = '\0';
     menu_stack[++menu_level] = &_menu_screen_recorder;
@@ -833,18 +833,18 @@ void menu_screen_recorder(void *pt)
 void menu_tools_m3uGenerator(void *_)
 {
     if (!_menu_tools_m3uGenerator._created) {
-        _menu_tools_m3uGenerator = list_createWithTitle(2, LIST_SMALL, "M3U Generator");
+        _menu_tools_m3uGenerator = list_createWithTitle(2, LIST_SMALL, "Tạo tệp M3U");
         list_addItemWithInfoNote(&_menu_tools_m3uGenerator,
                                  (ListItem){
-                                     .label = "Multiple directories (.Game_Name)",
+                                     .label = "Nhiều thư mục (.Game_Name)",
                                      .action = tool_generateM3uFiles_md},
-                                 "One directory for each game \".Game_Name\"");
+                                 "Một thư mục cho mỗi trò chơi \".Game_Name\"");
         list_addItemWithInfoNote(&_menu_tools_m3uGenerator,
                                  (ListItem){
-                                     .label = "Single directory (.multi-disc)",
+                                     .label = "Thư mục đơn (.multi-disc)",
                                      .action = tool_generateM3uFiles_sd},
-                                 "One single directory (\".multi-disc\")\n"
-                                 "will contain all multi-disc files");
+                                 "Một thư mục duy nhất (\".multi-disc\")\n"
+                                 "sẽ chứa tất cả tập tin của game nhiều đĩa");
     }
     menu_stack[++menu_level] = &_menu_tools_m3uGenerator;
     header_changed = true;
@@ -857,53 +857,53 @@ void menu_tools(void *_)
         strcpy(_menu_tools.title, "Tools");
         list_addItemWithInfoNote(&_menu_tools,
                                  (ListItem){
-                                     .label = "Generate CUE files for BIN games",
+                                     .label = "Tạo tệp CUE cho trò chơi BIN",
                                      .action = tool_generateCueFiles},
-                                 "PSX roms in '.bin' format needs a\n"
-                                 "matching '.cue' file. Use this tool\n"
-                                 "to automatically generate them.");
+                                 "Rom PSX ở định dạng '.bin'\n"
+                                 "cần tệp '.cue' phù hợp.\n"
+                                 "Sử dụng công cụ này để tự động tạo chúng.");
         list_addItemWithInfoNote(&_menu_tools,
                                  (ListItem){
-                                     .label = "Generate M3U files for multi-disc games",
+                                     .label = "Tạo tệp M3U cho trò chơi nhiều đĩa",
                                      .action = menu_tools_m3uGenerator},
-                                 "PSX multi-disc roms require to create\n"
-                                 "a playlist file (.m3u). It allows to \n"
-                                 "have only one entry for each multi-disc\n"
-                                 "game and one unique save file for each game");
+                                 "Rom nhiều đĩa PSX yêu cầu tạo một tệp\n"
+                                 "danh sách phát (.m3u). Nó cho phép chỉ\n"
+                                 "có một mục nhập cho mỗi trò chơi nhiều đĩa\n"
+                                 "và một tệp lưu duy nhất cho mỗi trò chơi");
         list_addItemWithInfoNote(&_menu_tools,
                                  (ListItem){
-                                     .label = "Generate game list for short name roms",
+                                     .label = "Tạo danh sách trò chơi cho các rom tên ngắn",
                                      .action = tool_buildShortRomGameList},
-                                 "This tool replaces the short names in\n"
-                                 "game caches with their equivalent real\n"
-                                 "names. This ensures the list is sorted\n"
-                                 "correctly.");
+                                 "Công cụ này thay thế tên viết tắt trong\n"
+                                 "bộ nhớ đệm trò chơi bằng tên thật tương đương.\n"
+                                 "Điều này đảm bảo danh sách được\n"
+                                 "sắp xếp đúng.");
         list_addItemWithInfoNote(&_menu_tools,
                                  (ListItem){
-                                     .label = "Generate miyoogamelist with digest names",
+                                     .label = "Tạo miyoogamelist với tên tóm tắt",
                                      .action = tool_generateMiyoogamelists},
-                                 "Use this tool to clean your game names\n"
-                                 "without having to rename the rom files\n"
-                                 "(removes parens, rankings, and much more).\n"
-                                 "This generates a 'miyoogamelist.xml' file\n"
-                                 "which comes with some limitations, such\n"
-                                 "as no subfolder support.");
+                                 "Sử dụng công cụ này để xóa têntrò chơi\n"
+                                 "của bạn mà không cần phải đổi tên tệp rom\n"
+                                 "(xóa dấu ngoặc đơn, thứ hạng và nhiều thứ khác).\n"
+                                 "Công cụ này sẽ tạo ra tệp 'miyoogamelist.xml'\n"
+                                 "đi kèm với một số hạn chế,\n"
+                                 "chẳng hạn như không hỗ trợ thư mục con.");
         list_addItem(&_menu_tools,
                      (ListItem){
-                         .label = "Screen recorder...",
+                         .label = "Trình ghi màn hình...",
                          .action = menu_screen_recorder});
         list_addItemWithInfoNote(&_menu_tools,
                                  (ListItem){
-                                     .label = "Sort applist A-Z",
+                                     .label = "Sắp xếp danh sách ứng dụng A-Z",
                                      .action = tool_sortAppsAZ},
-                                 "Use this tool to sort your App list\n"
-                                 "ascending from A to Z.\n");
+                                 "Sử dụng công cụ này để sắp xếp danh sách\n"
+                                 "Ứng dụng của bạn theo thứ tự tăng dần từ A đến Z.\n");
         list_addItemWithInfoNote(&_menu_tools,
                                  (ListItem){
-                                     .label = "Sort applist Z-A",
+                                     .label = "Sắp xếp danh sách ứng dụng Z-A",
                                      .action = tool_sortAppsZA},
-                                 "Use this tool to sort your App list\n"
-                                 "descending from Z to A.\n");
+                                 "Sử dụng công cụ này để sắp xếp danh sách\n"
+                                 "Ứng dụng của bạn theo thứ tự giảm dần từ Z đến A.\n");
     }
     menu_stack[++menu_level] = &_menu_tools;
     header_changed = true;
@@ -931,43 +931,43 @@ void *_get_menu_icon(const char *name)
 void menu_main(void)
 {
     if (!_menu_main._created) {
-        _menu_main = list_createWithTitle(6, LIST_LARGE, "Tweaks");
+        _menu_main = list_createWithTitle(6, LIST_LARGE, "Điều chỉnh");
         list_addItem(&_menu_main,
                      (ListItem){
-                         .label = "System",
-                         .description = "Startup, save and exit, vibration",
+                         .label = "Hệ thống",
+                         .description = "Khởi động, lưu & thoát, rung",
                          .action = menu_system,
                          .icon_ptr = _get_menu_icon("tweaks_system")});
         if (DEVICE_ID == MIYOO354) {
             list_addItem(&_menu_main,
                          (ListItem){
-                             .label = "Network",
-                             .description = "Setup networking",
+                             .label = "Mạng",
+                             .description = "Cài đặt mạng",
                              .action = menu_network,
                              .icon_ptr = _get_menu_icon("tweaks_network")});
         }
         list_addItem(&_menu_main,
                      (ListItem){
-                         .label = "Button shortcuts",
-                         .description = "Customize global button actions",
+                         .label = "Phím tắt",
+                         .description = "Tuỳ chỉnh hành động của các nút",
                          .action = menu_buttonAction,
                          .icon_ptr = _get_menu_icon("tweaks_menu_button")});
         list_addItem(&_menu_main,
                      (ListItem){
-                         .label = "Appearance",
-                         .description = "Menu visibility, theme overrides",
+                         .label = "Giao diện",
+                         .description = "Hiển thị menu, ghi đè chủ đề",
                          .action = menu_userInterface,
                          .icon_ptr = _get_menu_icon("tweaks_user_interface")});
         list_addItem(&_menu_main,
                      (ListItem){
-                         .label = "Advanced",
-                         .description = "Emulator tweaks, reset settings",
+                         .label = "Nâng cao",
+                         .description = "Điều chỉnh trình giả lập, thiết lập lại cài đặt",
                          .action = menu_advanced,
                          .icon_ptr = _get_menu_icon("tweaks_advanced")});
         list_addItem(&_menu_main,
                      (ListItem){
-                         .label = "Tools",
-                         .description = "Favorites, clean files",
+                         .label = "Công cụ",
+                         .description = "Tệp tin yêu thích, dọn dẹp",
                          .action = menu_tools,
                          .icon_ptr = _get_menu_icon("tweaks_tools")});
     }

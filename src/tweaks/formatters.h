@@ -13,26 +13,26 @@
 
 #define BUTTON_MAINUI_LABELS                          \
     {                                                 \
-        "Context menu", "GameSwitcher", "Resume game" \
+        "Menu ngữ cảnh", "GameSwitcher", "Tiếp tục trò chơi" \
     }
 #define BUTTON_INGAME_LABELS                                  \
     {                                                         \
-        "Off", "GameSwitcher", "Exit to menu", "Quick switch" \
+        "Tắt", "GameSwitcher", "Thoát khỏi menu", "Chuyển đổi nhanh" \
     }
 
 #define THEME_TOGGLE_LABELS \
     {                       \
-        "-", "Off", "On"    \
+        "-", "Tắt", "Bật"    \
     }
 
 #define BLUELIGHT_LABELS                                                          \
     {                                                                             \
-        "Subtle 1/5", "Moderate 2/5", "Balanced 3/5", "Strong 4/5", "Intense 5/5" \
+        "Tinh tế 1/5", "Vừa phải 2/5", "Cân bằng 3/5", "Mạnh 4/5", "Mãnh liệt 5/5" \
     }
 
 #define PWM_FREQUENCIES                                                                                                \
     {                                                                                                                  \
-        "100 Hz", "200 Hz", "300 Hz", "400 Hz", "500 Hz", "600 Hz", "700 Hz", "800  Hz (Default)", "900 Hz", "1000 Hz" \
+        "100 Hz", "200 Hz", "300 Hz", "400 Hz", "500 Hz", "600 Hz", "700 Hz", "800  Hz (mặc định)", "900 Hz", "1000 Hz" \
     }
 
 void formatter_timezone(void *pt, char *out_label)
@@ -75,7 +75,7 @@ void formatter_appShortcut(void *pt, char *out_label)
     int max_value = installed_apps_count + NUM_TOOLS + item->action_id;
 
     if (value <= 0 || value > max_value) {
-        strcpy(out_label, item->action_id == 0 ? "B button" : "A button");
+        strcpy(out_label, item->action_id == 0 ? "Nút B" : "Nút A");
         return;
     }
 
@@ -90,7 +90,7 @@ void formatter_appShortcut(void *pt, char *out_label)
     // tools
     value -= installed_apps_count;
     if (value < NUM_TOOLS) {
-        sprintf(out_label, "Tool: %s", tools_short_names[value]);
+        sprintf(out_label, "Công cụ: %s", tools_short_names[value]);
         return;
     }
 
@@ -103,7 +103,7 @@ void formatter_battWarn(void *pt, char *out_label)
 {
     ListItem *item = (ListItem *)pt;
     if (item->value == 0)
-        strcpy(out_label, "Off");
+        strcpy(out_label, "Tắt");
     else
         sprintf(out_label, "< %d%%", item->value * 5);
 }
@@ -112,7 +112,7 @@ void formatter_battExit(void *pt, char *out_label)
 {
     ListItem *item = (ListItem *)pt;
     if (item->value == 0)
-        strcpy(out_label, "Off");
+        strcpy(out_label, "Tắt");
     else
         sprintf(out_label, "< %d%%", item->value);
 }
@@ -145,7 +145,7 @@ void formatter_fastForward(void *pt, char *out_label)
 {
     ListItem *item = (ListItem *)pt;
     if (item->value == 0)
-        strcpy(out_label, "Unlimited");
+        strcpy(out_label, "Không giới hạn");
     else
         sprintf(out_label, "%d.0x", item->value);
 }
@@ -170,7 +170,7 @@ void formatter_startupTab(void *pt, char *out_label)
     ListItem *item = (ListItem *)pt;
     switch (item->value) {
     case 0:
-        strcpy(out_label, "Main menu");
+        strcpy(out_label, "Menu chính");
         break;
     case 1:
         strncpy(out_label,
@@ -203,7 +203,7 @@ void formatter_timeSkip(void *pt, char *out_label)
 {
     ListItem *item = (ListItem *)pt;
     if (item->value == 0)
-        strcpy(out_label, "Off");
+        strcpy(out_label, "Tắt");
     else
         sprintf(out_label, "+ %dh", item->value);
 }

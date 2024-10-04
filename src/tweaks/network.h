@@ -420,8 +420,8 @@ void menu_smbd(void *pt)
 
         list_addItemWithInfoNote(&_menu_smbd,
                                  (ListItem){
-                                     .label = "Enable",
-                                     .sticky_note = "Enable Samba file sharing",
+                                     .label = "Bật",
+                                     .sticky_note = "Bật chia sẻ tệp Samba",
                                      .item_type = TOGGLE,
                                      .value = (int)network_state.smbd,
                                      .action = network_setSmbdState},
@@ -435,7 +435,7 @@ void menu_smbd(void *pt)
                 .value = _network_shares[i].available,
                 .payload_ptr = _network_shares + i // store a pointer to the share in the payload
             };
-            snprintf(shareItem.label, STR_MAX - 1, "Share: %s", _network_shares[i].name);
+            snprintf(shareItem.label, STR_MAX - 1, "Chia sẻ: %s", _network_shares[i].name);
             strncpy(shareItem.sticky_note, str_replace(_network_shares[i].path, "/mnt/SDCARD", "SD:"), STR_MAX - 1);
             list_addItem(&_menu_smbd, shareItem);
         }
@@ -454,23 +454,23 @@ void menu_http(void *pt)
         strcpy(_menu_http.title, "HTTP");
         list_addItemWithInfoNote(&_menu_http,
                                  (ListItem){
-                                     .label = "Enable",
+                                     .label = "Bật",
                                      .item_type = TOGGLE,
                                      .value = (int)network_state.http,
                                      .action = network_setHttpState},
                                  item->info_note);
         list_addItemWithInfoNote(&_menu_http,
                                  (ListItem){
-                                     .label = "Enable authentication",
+                                     .label = "Bật xác thực",
                                      .item_type = TOGGLE,
                                      .disabled = !network_state.http,
                                      .value = (int)network_state.auth_http,
                                      .action = network_setHttpAuthState},
-                                 "Username: admin\n"
-                                 "Password: admin\n"
+                                 "Tài khoản: admin\n"
+                                 "Mật khẩu: admin\n"
                                  " \n"
-                                 "It's recommended you change this\n"
-                                 "at first login.");
+                                 "Bạn nên thay đổi thông tin này\n"
+                                 "khi đăng nhập lần đầu.");
     }
     menu_stack[++menu_level] = &_menu_http;
     header_changed = true;
@@ -485,23 +485,24 @@ void menu_ftp(void *pt)
         strcpy(_menu_ftp.title, "FTP");
         list_addItemWithInfoNote(&_menu_ftp,
                                  (ListItem){
-                                     .label = "Enable",
+                                     .label = "Bật",
                                      .item_type = TOGGLE,
                                      .value = (int)network_state.ftp,
                                      .action = network_setFtpState},
                                  item->info_note);
         list_addItemWithInfoNote(&_menu_ftp,
                                  (ListItem){
-                                     .label = "Enable authentication",
+                                     .label = "Bật xác thực",
                                      .item_type = TOGGLE,
                                      .disabled = !network_state.ftp,
                                      .value = (int)network_state.auth_ftp,
                                      .action = network_setFtpAuthState},
-                                 "Username: onion\n"
-                                 "Password: onion\n"
+                                 "Tài khoản: onion\n"
+                                 "Mật khẩu: onion\n"
                                  " \n"
-                                 "We're using a new auth system. User defined\n"
-                                 "passwords will come in a future update.");
+                                 "Chúng tôi đang sử dụng hệ thống xác thực mới.\n"
+                                 "Mật khẩu do người dùng xác định sẽ có trong\n"
+                                 "bản cập nhật trong tương lai.");
     }
     menu_stack[++menu_level] = &_menu_ftp;
     header_changed = true;
@@ -514,7 +515,7 @@ void menu_wps(void *_)
         strcpy(_menu_wps.title, "WPS");
         list_addItem(&_menu_wps,
                      (ListItem){
-                         .label = "WPS connect",
+                         .label = "Kết nối WPS",
                          .action = network_wpsConnect});
     }
     menu_stack[++menu_level] = &_menu_wps;
@@ -530,23 +531,24 @@ void menu_ssh(void *pt)
         strcpy(_menu_ssh.title, "SSH");
         list_addItemWithInfoNote(&_menu_ssh,
                                  (ListItem){
-                                     .label = "Enable",
+                                     .label = "Bật",
                                      .item_type = TOGGLE,
                                      .value = (int)network_state.ssh,
                                      .action = network_setSshState},
                                  item->info_note);
         list_addItemWithInfoNote(&_menu_ssh,
                                  (ListItem){
-                                     .label = "Enable authentication",
+                                     .label = "Bật xác thực",
                                      .item_type = TOGGLE,
                                      .disabled = !network_state.ssh,
                                      .value = (int)network_state.auth_ssh,
                                      .action = network_setSshAuthState},
-                                 "Username: onion\n"
-                                 "Password: onion\n"
+                                 "Tài khoản: onion\n"
+                                 "Mật khẩu: onion\n"
                                  " \n"
-                                 "We're using a new auth system. User defined\n"
-                                 "passwords will come in a future update.");
+                                 "Chúng tôi đang sử dụng hệ thống xác thực mới.\n"
+                                 "Mật khẩu do người dùng xác định sẽ có trong\n"
+                                 "bản cập nhật trong tương lai.");
     }
     menu_stack[++menu_level] = &_menu_ssh;
     header_changed = true;
@@ -561,21 +563,21 @@ void menu_vnc(void *pt)
         strcpy(_menu_vnc.title, "VNC");
         list_addItem(&_menu_vnc,
                      (ListItem){
-                         .label = "Enable",
+                         .label = "Bật",
                          .item_type = TOGGLE,
                          .value = (int)network_state.vncserv,
                          .action = network_toggleVNC});
         list_addItemWithInfoNote(&_menu_vnc,
                                  (ListItem){
-                                     .label = "Framerate",
+                                     .label = "Tốc độ khung hình",
                                      .item_type = MULTIVALUE,
                                      .value_max = 20,
                                      .value_min = 1,
                                      .value = (int)network_state.vncfps,
                                      .action = network_setVNCFPS},
-                                 "Set the framerate of the VNC server\n"
-                                 "between 1 and 20. The higher the \n"
-                                 "framerate the more CPU it will use \n");
+                                 "Đặt tốc độ khung hình của máy chủ VNC\n"
+                                 "trong khoảng từ 1 đến 20.\n"
+                                 "Tốc độ khung hình càng cao thì càng sử dụng nhiều CPU.\n");
     }
     menu_stack[++menu_level] = &_menu_vnc;
     header_changed = true;
@@ -588,29 +590,29 @@ void menu_wifi(void *_)
         strcpy(_menu_wifi.title, "WiFi");
         list_addItem(&_menu_wifi,
                      (ListItem){
-                         .label = "IP address: N/A",
+                         .label = "Đại chỉ IP: N/A",
                          .disabled = true,
                          .action = NULL});
         list_addItemWithInfoNote(&_menu_wifi,
                                  (ListItem){
-                                     .label = "WiFi Hotspot",
+                                     .label = "Điểm phát sóng WiFi",
                                      .item_type = TOGGLE,
                                      .value = (int)network_state.hotspot,
                                      .action = network_setHotspotState},
-                                 "Use hotspot to host all the network\n"
-                                 "services on the go, no router needed.\n"
-                                 "Stay connected at anytime, anywhere.\n"
-                                 "Compatible with Easy Netplay and\n"
-                                 "regular netplay.");
+                                 "Sử dụng điểm phát sóng để lưu trữ tất cả các dịch vụ\n"
+                                 "mạng khi đang di chuyển, không cần bộ định tuyến.\n"
+                                 "Luôn kết nối mọi lúc, mọi nơi.\n"
+                                 "Tương thích với Easy Netplay và\n"
+                                 "netplay thông thường.");
         list_addItemWithInfoNote(&_menu_wifi,
                                  (ListItem){
-                                     .label = "WPS connect",
+                                     .label = "Kết nối WPS",
                                      .action = network_wpsConnect},
-                                 "Use your WiFi router's WPS function\n"
-                                 "to connect your device with a single press.\n"
+                                 "Sử dụng chức năng WPS của bộ định tuyến WiFi\n"
+                                 "để kết nối thiết bị chỉ bằng một lần nhấn.\n"
                                  " \n"
-                                 "First press the WPS button on your router,\n"
-                                 "then click this option to connect.");
+                                 "Đầu tiên hãy nhấn nút WPS trên bộ định tuyến\n"
+                                 "của bạn, sau đó nhấp vào tùy chọn này để kết nối.");
         // list_addItem(&_menu_wifi,
         //              (ListItem){
         //                  .label = "WPS...",
@@ -625,106 +627,106 @@ void menu_network(void *_)
 {
     if (!_menu_network._created) {
         _menu_network = list_create(9, LIST_SMALL);
-        strcpy(_menu_network.title, "Network");
+        strcpy(_menu_network.title, "Mạng");
 
         network_loadState();
 
         list_addItem(&_menu_network,
                      (ListItem){
-                         .label = "IP address: N/A",
+                         .label = "Địa chỉ IP: N/A",
                          .disabled = true,
                          .action = NULL});
         list_addItem(&_menu_network,
                      (ListItem){
-                         .label = "WiFi: Hotspot/WPS...",
+                         .label = "WiFi: Điểm phát sóng/WPS...",
                          .action = menu_wifi});
         list_addItemWithInfoNote(&_menu_network,
                                  (ListItem){
-                                     .label = "Samba: Network file share...",
+                                     .label = "Samba: Chia sẻ tập tin qua mạng...",
                                      .item_type = TOGGLE,
                                      .disabled = !settings.wifi_on,
                                      .alternative_arrow_action = true,
                                      .arrow_action = network_setSmbdState,
                                      .value = (int)network_state.smbd,
                                      .action = menu_smbd},
-                                 "Samba is a file sharing protocol that provides\n"
-                                 "integrated sharing of files and directories\n"
-                                 "between your Miyoo Mini Plus and your PC.\n"
+                                 "Samba là một giao thức chia sẻ tập tin cung cấp\n"
+                                 "khả năng chia sẻ tập tin và thư mục tích hợp giữa\n"
+                                 "Miyoo Mini Plus và PC của bạn.\n"
                                  " \n"
-                                 "Username: onion\n"
-                                 "Password: onion\n");
+                                 "Tài khoản: onion\n"
+                                 "Mật khẩu: onion\n");
         list_addItemWithInfoNote(&_menu_network,
                                  (ListItem){
-                                     .label = "HTTP: Web-based file sync...",
+                                     .label = "HTTP: Đồng bộ hóa tập tin dựa trên web...",
                                      .item_type = TOGGLE,
                                      .disabled = !settings.wifi_on,
                                      .alternative_arrow_action = true,
                                      .arrow_action = network_setHttpState,
                                      .value = (int)network_state.http,
                                      .action = menu_http},
-                                 "HTTP file server allows you to manage your\n"
-                                 "files through a web browser on your phone,\n"
-                                 "PC or tablet.\n"
+                                 "Máy chủ tệp HTTP cho phép bạn quản lý tệp của mình\n"
+                                 "thông qua trình duyệt web trên điện thoại, PC\n"
+                                 "hoặc máy tính bảng.\n"
                                  " \n"
-                                 "Think of it as a website hosted by Onion,\n"
-                                 "simply enter the IP address in your browser.");
+                                 "Hãy nghĩ về nó như một trang web được lưu trữ bởi Onion,\n"
+                                 "chỉ cần nhập địa chỉ IP vào trình duyệt của bạn.");
         list_addItemWithInfoNote(&_menu_network,
                                  (ListItem){
-                                     .label = "SSH: Secure shell...",
+                                     .label = "SSH: Shell bảo mật...",
                                      .item_type = TOGGLE,
                                      .disabled = !settings.wifi_on,
                                      .alternative_arrow_action = true,
                                      .arrow_action = network_setSshState,
                                      .value = (int)network_state.ssh,
                                      .action = menu_ssh},
-                                 "SSH provides a secure command line host\n"
-                                 "for communicating with your device remotely.\n"
+                                 "SSH cung cấp máy chủ dòng lệnh an toàn\n"
+                                 "để giao tiếp với thiết bị của bạn từ xa.\n"
                                  " \n"
-                                 "SFTP provides a secure file transfer protocol.");
+                                 "SFTP cung cấp một giao thức truyền tệp an toàn.");
         list_addItemWithInfoNote(&_menu_network,
                                  (ListItem){
-                                     .label = "FTP: File server...",
+                                     .label = "FTP: Máy chủ tập tin...",
                                      .item_type = TOGGLE,
                                      .disabled = !settings.wifi_on,
                                      .alternative_arrow_action = true,
                                      .arrow_action = network_setFtpState,
                                      .value = (int)network_state.ftp,
                                      .action = menu_ftp},
-                                 "FTP provides a method of transferring files\n"
-                                 "between Onion and a PC, phone, or tablet.\n"
-                                 "You'll need an FTP client installed on the\n"
-                                 "other device.");
+                                 "FTP cung cấp phương pháp truyền tệp giữa\n"
+                                 "Onion và PC, điện thoại hoặc máy tính bảng.\n"
+                                 "Bạn sẽ cần cài đặt một chương trình FTP\n"
+                                 "trên thiết bị kia.");
         list_addItemWithInfoNote(&_menu_network,
                                  (ListItem){
-                                     .label = "Telnet: Remote shell",
+                                     .label = "Telnet: Shell từ xa",
                                      .item_type = TOGGLE,
                                      .disabled = !settings.wifi_on,
                                      .value = (int)network_state.telnet,
                                      .action = network_setTelnetState},
-                                 "Telnet provides unencrypted remote shell\n"
-                                 "access to your device.");
+                                 "Telnet cung cấp quyền truy cập shell từ xa\n"
+                                 "không được mã hóa vào thiết bị của bạn.");
         list_addItemWithInfoNote(&_menu_network,
                                  (ListItem){
-                                     .label = "VNC: Screen share...",
+                                     .label = "VNC: Chia sẻ màn hình...",
                                      .item_type = TOGGLE,
                                      .disabled = !settings.wifi_on,
                                      .alternative_arrow_action = true,
                                      .arrow_action = network_toggleVNC,
                                      .value = (int)network_state.vncserv,
                                      .action = menu_vnc},
-                                 "Connect to your MMP from another device\n"
-                                 "to view the screen and interact with it.");
+                                 "Kết nối với MMP của bạn từ một thiết bị khác\n"
+                                 "để xem màn hình và tương tác với màn hình đó.");
         list_addItemWithInfoNote(&_menu_network,
                                  (ListItem){
-                                     .label = "Disable services in game",
+                                     .label = "Tắt dịch vụ trong trò chơi",
                                      .item_type = TOGGLE,
                                      .value = !network_state.keep_alive,
                                      .action = network_keepServicesAlive},
-                                 "Disable all network services (except WiFi)\n"
-                                 "while playing games.\n"
+                                 "Tắt mọi dịch vụ mạng (trừ WiFi)\n"
+                                 "khi chơi trò chơi.\n"
                                  " \n"
-                                 "This helps to conserve battery and\n"
-                                 "to keep performance at a maximum.");
+                                 "Điều này giúp tiết kiệm pin và\n"
+                                 "duy trì hiệu suất ở mức tối đa.");
     }
     strcpy(_menu_network.items[0].label, ip_address_label);
     menu_stack[++menu_level] = &_menu_network;

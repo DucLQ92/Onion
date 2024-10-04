@@ -55,11 +55,11 @@ void _toolDialog(const char *title_str, const char *message_str,
 
 void _runCommandPopup(const char *tool_name, const char *_cmd)
 {
-    static char msg_apply[] = "Applying tool...\n \n \n ";
+    static char msg_apply[] = "Áp dụng công cụ...\n \n \n ";
 
     keys_enabled = false;
     char full_title[STR_MAX];
-    sprintf(full_title, "Tool: %s", tool_name);
+    sprintf(full_title, "Công cụ: %s", tool_name);
     _toolDialog(full_title, msg_apply, false);
 
     char cmd[STR_MAX];
@@ -82,7 +82,7 @@ void _runCommandPopup(const char *tool_name, const char *_cmd)
 
     if (video != NULL)
         msleep(300);
-    _toolDialog(full_title, thread_success ? "Done" : "Tool failed", false);
+    _toolDialog(full_title, thread_success ? "Xong" : "Không thành công", false);
 
     if (video != NULL)
         msleep(1200);
@@ -98,25 +98,25 @@ void _displayM3uTotal()
 {
     FILE *file = fopen("/tmp/count_m3u", "r");
     if (file == NULL) {
-        perror("Error opening file");
+        perror("Lỗi khi mở tập tin");
         return;
     }
     int value;
     if (fscanf(file, "%d", &value) != 1) {
-        perror("Error reading from file");
+        perror("Lỗi khi đọc tập tin");
         fclose(file);
         return;
     }
     fclose(file);
 
     if (remove("/tmp/count_m3u") != 0) {
-        perror("Error deleting file");
+        perror("Lỗi khi xóa tập tin");
     }
 
     char message[28];
-    snprintf(message, sizeof(message), "%d playlist files created.", value);
+    snprintf(message, sizeof(message), "Đã tạo %d tệp danh sách phát.", value);
 
-    _toolDialog("M3U Generator", message, false);
+    _toolDialog("Tạo tập tin M3U", message, false);
     if (video != NULL)
         msleep(1200);
 }
@@ -168,18 +168,18 @@ void tool_screenRecorder(void *pt)
     fileCheck = exists("/tmp/recorder_active");
 
     if (!fileCheck) {
-        list_updateStickyNote(item, "Status: Now recording...");
+        list_updateStickyNote(item, "Trạng thái: Đang ghi...");
         system(cmd);
     }
     else {
         if (file_findNewest(RECORDED_DIR, newestFile, sizeof(newestFile))) {
             char note[STR_MAX];
             system(cmd);
-            snprintf(note, sizeof(note), "Stopped, saved as: %s", newestFile);
+            snprintf(note, sizeof(note), "Đã dừng, lưu dưới dạng: %s", newestFile);
             list_updateStickyNote(item, note);
         }
         else {
-            list_updateStickyNote(item, "Status: Recording ended, no new file found.");
+            list_updateStickyNote(item, "Trạng thái: Quá trình ghi đã kết thúc, không tìm thấy tập tin mới.");
             snprintf(cmd, sizeof(cmd), "/mnt/SDCARD/.tmp_update/script/screen_recorder.sh hardkill &");
         }
     }

@@ -187,13 +187,13 @@ int main(int argc, char *argv[])
         if (show_help_tooltip) {
             show_help_tooltip = false;
             config_flag_set(".tweaksHelpCompleted", true);
-            __showInfoDialog("Welcome to Tweaks!",
-                             ":: TOOLTIPS ::\n"
+            __showInfoDialog("Chào mừng đến với Trình Điều chỉnh!",
+                             ":: MẸO CÔNG CỤ ::\n"
                              " \n"
-                             "Press SELECT to view a tooltip\n"
-                             "describing the selected option."
+                             "Nhấn SELECT để xem chú giải công cụ\n"
+                             "mô tả tùy chọn đã chọn."
                              " \n"
-                             "Press any button to close");
+                             "Nhấn nút bất kỳ để đóng");
         }
 
         if (battery_hasChanged(ticks, &battery_percentage))

@@ -43,7 +43,7 @@ bool _confirmReset(const char *title_str, const char *message_str)
 
     if (retval) {
         SDL_BlitSurface(screen, NULL, background_cache, NULL);
-        theme_renderDialog(screen, title_str, "Resetting...", false);
+        theme_renderDialog(screen, title_str, "Đang thiết lập lại...", false);
         SDL_BlitSurface(screen, NULL, video, NULL);
         SDL_Flip(video);
     }
@@ -58,7 +58,7 @@ bool _confirmReset(const char *title_str, const char *message_str)
 void _notifyResetDone(const char *title_str)
 {
     SDL_BlitSurface(background_cache, NULL, screen, NULL);
-    theme_renderDialog(screen, title_str, "Done", false);
+    theme_renderDialog(screen, title_str, "Xong", false);
     SDL_BlitSurface(screen, NULL, video, NULL);
     SDL_Flip(video);
     msleep(300);
@@ -72,8 +72,8 @@ void _notifyResetDone(const char *title_str)
 
 void action_resetTweaks(void *pt)
 {
-    const char title_str[] = "Reset system tweaks";
-    if (!_disable_confirm && !_confirmReset(title_str, "Are you sure you want to\nreset system tweaks?"))
+    const char title_str[] = "Thiết lập lại các tinh chỉnh hệ thống";
+    if (!_disable_confirm && !_confirmReset(title_str, "Bạn có chắc chắn muốn\nthiết lập lại các tinh chỉnh hệ thống không?"))
         return;
     rename(RESET_CONFIGS_PAK, "/mnt/SDCARD/.tmp_update/temp");
     system("rm -rf /mnt/SDCARD/.tmp_update/config && mkdir -p /mnt/SDCARD/.tmp_update/config");
@@ -87,8 +87,8 @@ void action_resetTweaks(void *pt)
 
 void action_resetThemeOverrides(void *pt)
 {
-    const char title_str[] = "Reset theme overrides";
-    if (!_disable_confirm && !_confirmReset(title_str, "Are you sure you want to\nreset theme overrides?"))
+    const char title_str[] = "Đặt lại ghi đè chủ đề";
+    if (!_disable_confirm && !_confirmReset(title_str, "Bạn có chắc chắn muốn\nđặt lại ghi đè chủ đề không?"))
         return;
     system("rm -rf /mnt/SDCARD/Saves/CurrentProfile/theme/*");
     if (!_disable_confirm)
@@ -97,9 +97,9 @@ void action_resetThemeOverrides(void *pt)
 
 void action_resetMainUI(void *pt)
 {
-    const char title_str[] = "Reset MainUI settings";
+    const char title_str[] = "Đặt lại cài đặt MainUI";
 
-    if (!_disable_confirm && !_confirmReset(title_str, "Are you sure you want to\nreset MainUI settings?"))
+    if (!_disable_confirm && !_confirmReset(title_str, "Bạn có chắc chắn muốn\nthiết lập lại cài đặt MainUI không?"))
         return;
 
     system("rm -f /mnt/SDCARD/system.json");
@@ -121,8 +121,8 @@ void action_resetMainUI(void *pt)
 
 void action_resetRAMain(void *pt)
 {
-    const char title_str[] = "Reset RetroArch configuration";
-    if (!_disable_confirm && !_confirmReset(title_str, "Are you sure you want to reset\nRetroArch main configuration?"))
+    const char title_str[] = "Đặt lại cấu hình RetroArch";
+    if (!_disable_confirm && !_confirmReset(title_str, "Bạn có chắc chắn muốn thiết lập lại cấu hình chính của RetroArch không?"))
         return;
     system("7z x -aoa " RESET_CONFIGS_PAK " -o/mnt/SDCARD/ -ir!RetroArch/*");
     reset_menus = true;
@@ -132,8 +132,8 @@ void action_resetRAMain(void *pt)
 
 void action_resetRACores(void *pt)
 {
-    const char title_str[] = "Reset all RA core overrides";
-    if (!_disable_confirm && !_confirmReset(title_str, "Are you sure you want to reset\nall RetroArch core overrides?"))
+    const char title_str[] = "Đặt lại tất cả các lõi RA đã ghi đè";
+    if (!_disable_confirm && !_confirmReset(title_str, "Bạn có chắc chắn muốn\nthiết lập lại tất cả lõi RetroArch được ghi đè không?"))
         return;
     system("rm -rf /mnt/SDCARD/Saves/CurrentProfile/config/*");
     system("7z x " RESET_CONFIGS_PAK " -o/mnt/SDCARD/ -ir!Saves/CurrentProfile/config/*");
@@ -144,8 +144,8 @@ void action_resetRACores(void *pt)
 
 void action_resetAdvanceMENU(void *pt)
 {
-    const char title_str[] = "Reset AdvanceMENU/MAME/MESS";
-    if (!_disable_confirm && !_confirmReset(title_str, "Are you sure you want to\nreset AdvanceMENU/MAME/MESS?"))
+    const char title_str[] = "Đặt lại AdvanceMENU/MAME/MESS";
+    if (!_disable_confirm && !_confirmReset(title_str, "Bạn có chắc chắn muốn\nđặt lại AdvanceMENU/MAME/MESS không?"))
         return;
     system("7z x -aoa " RESET_CONFIGS_PAK " -o/mnt/SDCARD/ -ir!BIOS/.advance/*");
     reset_menus = true;
@@ -155,8 +155,8 @@ void action_resetAdvanceMENU(void *pt)
 
 void action_resetAll(void *pt)
 {
-    const char title_str[] = "Reset everything";
-    if (!_confirmReset(title_str, "Are you sure you want to\nreset everything?"))
+    const char title_str[] = "Thiết lập lại mọi thứ";
+    if (!_confirmReset(title_str, "Bạn có chắc chắn muốn\nthiết lập lại mọi thứ không?"))
         return;
     _disable_confirm = true;
     action_resetTweaks(pt);
