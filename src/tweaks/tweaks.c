@@ -187,7 +187,7 @@ int main(int argc, char *argv[])
         if (show_help_tooltip) {
             show_help_tooltip = false;
             config_flag_set(".tweaksHelpCompleted", true);
-            __showInfoDialog("Chào mừng đến với Trình Điều chỉnh!",
+            __showInfoDialog("Chào mừng đến với Tweaks!",
                              ":: MẸO CÔNG CỤ ::\n"
                              " \n"
                              "Nhấn SELECT để xem chú giải công cụ\n"

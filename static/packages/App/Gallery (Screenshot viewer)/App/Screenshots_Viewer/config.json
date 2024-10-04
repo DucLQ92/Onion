@@ -1,5 +1,5 @@
 {
-"label":"Gallery",
+"label":"Bộ sưu tập",
 "icon":"../../Icons/Default/app/gallery.png",
 "launch":"launch.sh",
 "description":"Trình xem ảnh chụp màn hình"

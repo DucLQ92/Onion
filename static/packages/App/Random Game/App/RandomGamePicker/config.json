@@ -1,5 +1,5 @@
 {
-    "label":"Random Game",
+    "label":"Trò chơi ngẫu nhiên",
     "icon":"../../Icons/Default/app/dice.png",
     "launch":"launch.sh",
     "description":"Khởi chạy trò chơi ngẫu nhiên (bất kỳ hệ thống nào)"

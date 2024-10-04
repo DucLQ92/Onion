@@ -2,5 +2,5 @@
 	"label": "AdvanceMENU",
 	"icon": "../../Icons/Default/app/advancemenu.png",
 	"launch": "launch.sh",
-	"description": "Advanced emulator frontend"
+	"description": "Giao diện giả lập nâng cao"
 }

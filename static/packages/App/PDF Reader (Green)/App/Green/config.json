@@ -1,7 +1,7 @@
 {
-"label":"PDF Reader",
+"label":"Trình đọc PDF",
 "icon":"../../Icons/Default/app/pdf.png",
 "iconsel":"",
 "launch":"launch.sh",
-"description":"Green - Đọc tập tin Pdf"
+"description":"Green - Đọc tập tin PDF"
 }
