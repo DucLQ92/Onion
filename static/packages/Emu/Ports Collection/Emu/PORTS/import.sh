@@ -4,7 +4,7 @@ scandir=/mnt/SDCARD/Emu/PORTS/../../Roms/PORTS/Shortcuts
 count_found=0
 count_notfound=0
 
-infoPanel -t "Ports Import" -m "Scanning..." --persistent &
+infoPanel -t "Nhập trò chơi Port" -m "Đang quét..." --persistent &
 
 rm $scandir/../import.log 2> /dev/null
 
@@ -107,6 +107,6 @@ touch /tmp/dismiss_info_panel
 sync
 
 ports_total=$((count_found + count_notfound))
-infoPanel -t "Ports Import" -m "Found $count_found of $ports_total $([ $ports_total -eq 1 ] && (echo "port") || (echo "ports"))" --auto
+infoPanel -t "Nhập trò chơi Port" -m "Tìm thấy $count_found trên $ports_total $([ $ports_total -eq 1 ] && (echo "port") || (echo "ports"))" --auto
 
 /mnt/SDCARD/.tmp_update/script/reset_list.sh "$scandir"

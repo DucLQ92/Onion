@@ -14,6 +14,6 @@ if [ -f "/tmp/MissingPortFile.tmp" ]; then
 	MissingPortFile=`cat /tmp/MissingPortFile.tmp`
 	echo "Game data not found: $MissingPortFile"
 	echo -ne  "===================================================================\n\n"
-	infoPanel --title "Port Launch Error"  --message "Port files not found:\n$MissingPortFile"
+	infoPanel --title "Lỗi chạy găme Port"  --message "Không tìm thấy tập tin Port:\n$MissingPortFile"
 	rm "/tmp/MissingPortFile.tmp"
 fi

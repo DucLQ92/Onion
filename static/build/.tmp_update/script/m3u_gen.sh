@@ -165,5 +165,5 @@ for dir in $DIR_LIST; do
 done
 
 if [ "$#" -eq 0 ]; then # when launched by GLO menu, without args.
-  infoPanel --title "Multi-disc Creator" --message "$(cat "$count_m3u") playlist files created." --auto
+  infoPanel --title "Trình tạo đa đĩa" --message "$(cat "$count_m3u") tệp danh sách phát đã được tạo." --auto
 fi

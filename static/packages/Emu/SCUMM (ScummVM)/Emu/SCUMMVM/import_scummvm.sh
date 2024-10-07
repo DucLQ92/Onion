@@ -29,7 +29,7 @@ main() {
     echo "Naming scheme: $naming_mode"
 
     if [ $skip_scan -eq 0 ]; then
-        infoPanel -t "$ui_title" -m "Scanning..." --persistent 2> /dev/null &
+        infoPanel -t "$ui_title" -m "Đang quét..." --persistent 2> /dev/null &
         echo -e "\nScanning...\n"
         start=`date +%s`
 
@@ -40,7 +40,7 @@ main() {
     fi
 
     if [ ! -f "$scummvm_config" ]; then
-        infoPanel -t "$ui_title" -m "No scan found\n \nPlease run import first" --auto 2> /dev/null
+        infoPanel -t "$ui_title" -m "Không tìm thấy bản quét nào\n \nVui lòng chạy lệnh nhập trước" --auto 2> /dev/null
         exit
     fi
 

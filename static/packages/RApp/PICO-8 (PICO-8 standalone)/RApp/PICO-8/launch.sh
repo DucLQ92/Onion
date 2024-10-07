@@ -81,7 +81,7 @@ purge_devil() {
 
 start_pico() {
     if [ ! -e "$picodir/bin/pico8_dyn" ]; then
-        infoPanel --title "PICO-8 binaries not found" --message "Native PICO-8 engine requires to purchase official \nbinaries which are not provided in Onion. \nGo to Lexaloffle's website, get Raspberry Pi version\n and copy \"pico8_dyn\" and \"pico8.dat\"\n to your SD card in \"/RApp/PICO-8/bin\"."
+        infoPanel --title "Không tìm thấy tệp nhị phân PICO-8" --message "Công cụ trò chơi PICO-8 gốc yêu cầu phải mua bản chính thức \ncác tệp nhị phân không được cung cấp trong Onion. \nTruy cập trang web của Lexaloffle, tải phiên bản Raspberry Pi\n và chép \"pico8_dyn\" và \"pico8.dat\"\n vào thẻ nhớ của bạn ở mục \"/RApp/PICO-8/bin\"."
         cd /mnt/SDCARD/.tmp_update/script
         ./remove_last_recent_entry.sh
         exit

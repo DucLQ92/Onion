@@ -8,8 +8,8 @@ ec=$?
 if [ $ec -eq 255 ] || [ $ec -eq 0 ]; then
     exit 0
 elif [ $ec -eq 1 ]; then
-    infoPanel -t Gallery -m "No screenshots found"
+    infoPanel -t Thư viện -m "Không có ảnh chụp màn hình nào"
 else
     # something went wrong
-    infoPanel -t Gallery -m "An error occurred - code: $ec"
+    infoPanel -t Thư viện -m "Có lỗi xảy ra - mã: $ec"
 fi

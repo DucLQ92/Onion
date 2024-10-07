@@ -468,7 +468,6 @@ void menu_http(void *pt)
                                      .action = network_setHttpAuthState},
                                  "Tài khoản: admin\n"
                                  "Mật khẩu: admin\n"
-                                 " \n"
                                  "Bạn nên thay đổi thông tin này\n"
                                  "khi đăng nhập lần đầu.");
     }
@@ -499,7 +498,6 @@ void menu_ftp(void *pt)
                                      .action = network_setFtpAuthState},
                                  "Tài khoản: onion\n"
                                  "Mật khẩu: onion\n"
-                                 " \n"
                                  "Chúng tôi đang sử dụng hệ thống xác thực mới.\n"
                                  "Mật khẩu do người dùng xác định sẽ có trong\n"
                                  "bản cập nhật trong tương lai.");
@@ -545,7 +543,6 @@ void menu_ssh(void *pt)
                                      .action = network_setSshAuthState},
                                  "Tài khoản: onion\n"
                                  "Mật khẩu: onion\n"
-                                 " \n"
                                  "Chúng tôi đang sử dụng hệ thống xác thực mới.\n"
                                  "Mật khẩu do người dùng xác định sẽ có trong\n"
                                  "bản cập nhật trong tương lai.");
@@ -610,7 +607,6 @@ void menu_wifi(void *_)
                                      .action = network_wpsConnect},
                                  "Sử dụng chức năng WPS của bộ định tuyến WiFi\n"
                                  "để kết nối thiết bị chỉ bằng một lần nhấn.\n"
-                                 " \n"
                                  "Đầu tiên hãy nhấn nút WPS trên bộ định tuyến\n"
                                  "của bạn, sau đó nhấp vào tùy chọn này để kết nối.");
         // list_addItem(&_menu_wifi,
@@ -652,7 +648,6 @@ void menu_network(void *_)
                                  "Samba là một giao thức chia sẻ tập tin cung cấp\n"
                                  "khả năng chia sẻ tập tin và thư mục tích hợp giữa\n"
                                  "Miyoo Mini Plus và PC của bạn.\n"
-                                 " \n"
                                  "Tài khoản: onion\n"
                                  "Mật khẩu: onion\n");
         list_addItemWithInfoNote(&_menu_network,
@@ -667,7 +662,6 @@ void menu_network(void *_)
                                  "Máy chủ tệp HTTP cho phép bạn quản lý tệp của mình\n"
                                  "thông qua trình duyệt web trên điện thoại, PC\n"
                                  "hoặc máy tính bảng.\n"
-                                 " \n"
                                  "Hãy nghĩ về nó như một trang web được lưu trữ bởi Onion,\n"
                                  "chỉ cần nhập địa chỉ IP vào trình duyệt của bạn.");
         list_addItemWithInfoNote(&_menu_network,
@@ -681,7 +675,6 @@ void menu_network(void *_)
                                      .action = menu_ssh},
                                  "SSH cung cấp máy chủ dòng lệnh an toàn\n"
                                  "để giao tiếp với thiết bị của bạn từ xa.\n"
-                                 " \n"
                                  "SFTP cung cấp một giao thức truyền tệp an toàn.");
         list_addItemWithInfoNote(&_menu_network,
                                  (ListItem){

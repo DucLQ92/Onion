@@ -187,7 +187,7 @@ void menu_system(void *_)
                          .action = menu_datetime});
         list_addItemWithInfoNote(&_menu_system,
                                  (ListItem){
-                                     .label = "Cản báp pin yếu",
+                                     .label = "Cảnh báo pin yếu",
                                      .item_type = MULTIVALUE,
                                      .value_max = 5,
                                      .value_formatter = formatter_battWarn,
@@ -844,7 +844,7 @@ void menu_tools_m3uGenerator(void *_)
                                      .label = "Thư mục đơn (.multi-disc)",
                                      .action = tool_generateM3uFiles_sd},
                                  "Một thư mục duy nhất (\".multi-disc\")\n"
-                                 "sẽ chứa tất cả tập tin của game nhiều đĩa");
+                                 "sẽ chứa tất cả tập tin của trò chơi đa đĩa");
     }
     menu_stack[++menu_level] = &_menu_tools_m3uGenerator;
     header_changed = true;
@@ -854,7 +854,7 @@ void menu_tools(void *_)
 {
     if (!_menu_tools._created) {
         _menu_tools = list_create(NUM_TOOLS, LIST_SMALL);
-        strcpy(_menu_tools.title, "Tools");
+        strcpy(_menu_tools.title, "Công cụ");
         list_addItemWithInfoNote(&_menu_tools,
                                  (ListItem){
                                      .label = "Tạo tệp CUE cho trò chơi BIN",
@@ -864,11 +864,11 @@ void menu_tools(void *_)
                                  "Sử dụng công cụ này để tự động tạo chúng.");
         list_addItemWithInfoNote(&_menu_tools,
                                  (ListItem){
-                                     .label = "Tạo tệp M3U cho trò chơi nhiều đĩa",
+                                     .label = "Tạo tệp M3U cho trò chơi đa đĩa",
                                      .action = menu_tools_m3uGenerator},
-                                 "Rom nhiều đĩa PSX yêu cầu tạo một tệp\n"
+                                 "Rom đa đĩa PSX yêu cầu tạo một tệp\n"
                                  "danh sách phát (.m3u). Nó cho phép chỉ\n"
-                                 "có một mục nhập cho mỗi trò chơi nhiều đĩa\n"
+                                 "có một mục nhập cho mỗi trò chơi đa đĩa\n"
                                  "và một tệp lưu duy nhất cho mỗi trò chơi");
         list_addItemWithInfoNote(&_menu_tools,
                                  (ListItem){
@@ -882,7 +882,7 @@ void menu_tools(void *_)
                                  (ListItem){
                                      .label = "Tạo miyoogamelist với tên tóm tắt",
                                      .action = tool_generateMiyoogamelists},
-                                 "Sử dụng công cụ này để xóa têntrò chơi\n"
+                                 "Sử dụng công cụ này để xóa tên trò chơi\n"
                                  "của bạn mà không cần phải đổi tên tệp rom\n"
                                  "(xóa dấu ngoặc đơn, thứ hạng và nhiều thứ khác).\n"
                                  "Công cụ này sẽ tạo ra tệp 'miyoogamelist.xml'\n"

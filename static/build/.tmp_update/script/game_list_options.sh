@@ -541,7 +541,7 @@ run_script() {
         LD_PRELOAD=/mnt/SDCARD/miyoo/lib/libpadsp.so "$scriptpath" "$rompath" "$emupath"
         exit $?
     else
-        infoPanel --title "SCRIPT NOT FOUND" --message "$(basename "$scriptpath")" --auto
+        infoPanel --title "KHÔNG TÌM THẤY KỊCH BẢN" --message "$(basename "$scriptpath")" --auto
     fi
 }
 

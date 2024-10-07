@@ -2,7 +2,7 @@
 echo $0 $*
 sysdir=/mnt/SDCARD/.tmp_update
 
-infoPanel -t "AdvanceMENU" -m "LOADING" --persistent &
+infoPanel -t "AdvanceMENU" -m "ĐANG TẢI" --persistent &
 touch /tmp/dismiss_info_panel
 sync
 
